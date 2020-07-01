@@ -159,7 +159,7 @@ function generateUID() {
 }
 
 function formatQuestion({ creator, ...questions }) {
-    const [question_0, question_1, question_2] = questions;
+    const [question_0, question_1, question_2 = null] = questions;
 
     return {
         id: generateUID(),
@@ -223,7 +223,7 @@ export function _savePollAnswer({ qid, answer, authedUser }) {
                 [qid]: {
                     ...polls[qid],
                     [answer]: {
-                        ...polls[quid][answer],
+                        ...polls[qid][answer],
                         votes: polls[qid][answer].votes.concat([authedUser]),
                     },
                 },
