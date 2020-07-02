@@ -1,43 +1,48 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import { handleLogIn } from '../actions/shared';
 import { IconContext } from 'react-icons';
 import { FiChevronDown, FiChevronUp } from 'react-icons/fi';
-
-/* TODO: AUTHED_ID = login id  */
+import Avatar from './Avatar';
+import { Link, withRouter } from 'react-router-dom';
+import { device } from '../utils/device-unit';
 
 const SelectBox = styled.div`
     display: grid;
     grid-template-columns: auto 35px;
     padding: 1rem 0;
     cursor: pointer;
-    margin-left: 1rem;
     align-items: center;
-    color: #c4c4c4;
-`;
-
-const Avatar = styled.div`
-    background-image: url(${(props) => props.img});
-    background-size: cover;
-    background-position: center center;
-    width: 40px;
-    height: 40px;
-    border-radius: 40px;
-    display: inline-flex;
-    border: 3px solid #cd9fcc;
-    margin-left: 0.5rem;
+    color: #c1c1c1;
 `;
 
 const LoginBTN = styled.button`
     background: none;
     border: none;
     cursor: pointer;
+    transition: all 0.4s ease-out;
+    width: 95%;
+    display: flex;
+    align-items: center;
+    border-radius: 10px;
+    padding: 0.5rem 0;
+    margin: 0.5rem;
+    font-size: 1rem;
+
+    &:hover,
+    &:focus {
+        background-color: rgba(246, 202, 202, 0.5);
+    }
 `;
 
+/* TODO: it may be more user friendly to save user id to cookie  */
+
 function LoginSelectBox(props) {
+    /*  memory leak risk : https://reactjs.org/docs/hooks-effect.html */
     const [isOpen, setOpen] = useState(false);
     const users = [];
     Object.entries(props.userlist).map((user) => users.push(user[1]));
+
     return (
         <div
             style={{
@@ -52,30 +57,29 @@ function LoginSelectBox(props) {
         >
             <IconContext.Provider value={{ color: '#CD9FCC', size: '1.3rem' }}>
                 <SelectBox onClick={() => setOpen(!isOpen)}>
-                    which account is yours?{' '}
+                    <span style={{ marginLeft: `1rem` }}>
+                        which account is yours?
+                    </span>
                     {isOpen ? <FiChevronUp /> : <FiChevronDown />}
                 </SelectBox>
             </IconContext.Provider>
             {users.map((user) => (
-                <div
-                    key={user.id}
-                    style={
-                        isOpen
-                            ? {
-                                  padding: `.5rem`,
-                                  display: `grid`,
-                                  gridTemplateColumns: `25% 75%`,
-                                  cursor: `pointer`,
-                              }
-                            : { display: `none` }
-                    }
-                >
-                    <Avatar img={user.avatarURL} />
-                    <LoginBTN>{user.name}</LoginBTN>
+                <div key={user.id} style={isOpen ? {} : { display: `none` }}>
+                    <Link to={`/`} style={{ textDecoration: `none` }}>
+                        <LoginBTN
+                            onClick={() => {
+                                props.dispatch(handleLogIn(user.id));
+                                setTimeout(() => setOpen(!isOpen), 300);
+                            }}
+                        >
+                            <Avatar img={user.avatarURL} />
+                            {user.name}
+                        </LoginBTN>
+                    </Link>
                 </div>
             ))}
         </div>
     );
 }
 
-export default LoginSelectBox;
+export default withRouter(LoginSelectBox);

@@ -234,8 +234,8 @@ export function _savePollAnswer({ qid, answer, authedUser }) {
     });
 }
 
-export function _fakeAuthentication() {
+export function _fakeAuthentication(id) {
     return new Promise((res, rej) => {
-        setTimeout(() => res(), 1000);
+        setTimeout(() => res({ authedUser: id }, 1000));
     });
 }
