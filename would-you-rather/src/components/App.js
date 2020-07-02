@@ -3,7 +3,7 @@ import propTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { handleInitialData, handleLogIn } from '../actions/shared';
 import LoadingBar from 'react-redux-loading-bar';
-import { BrowserRouter as Router, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import { AuthContext } from '../context/auth';
 import PrivateRoute from '../PrivateRoute';
 
@@ -11,6 +11,7 @@ import Header from './Header';
 import Home from './Home';
 import Poll from './Poll';
 import Login from './Login';
+import NotFound from '../pages/404';
 
 function App(props) {
     useEffect(() => {
@@ -32,9 +33,12 @@ function App(props) {
                         justifyContent: `center`,
                     }}
                 >
-                    <Route path="/" exact component={Home} />
-                    <PrivateRoute path="/questions" component={Poll} />
-                    <Route path="/login" component={Login} />
+                    <Switch>
+                        <Route path="/" exact component={Home} />
+                        <PrivateRoute path="/questions" component={Poll} />
+                        <Route path="/login" component={Login} />
+                        <Route component={NotFound} />
+                    </Switch>
                 </div>
             </div>
         </AuthContext.Provider>
