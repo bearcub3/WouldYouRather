@@ -1,4 +1,10 @@
-import { _getUsers, _getPolls, _savePoll, _savePollAnswer } from './_DATA';
+import {
+    _getUsers,
+    _getPolls,
+    _savePoll,
+    _savePollAnswer,
+    _fakeAuthentication,
+} from './_DATA';
 
 export function getInitialData() {
     return Promise.all([_getUsers(), _getPolls()]).then(([users, polls]) => ({
@@ -13,4 +19,8 @@ export function savePollAnswer(info) {
 
 export function savePollQuestion(info) {
     return _savePoll(info);
+}
+
+export function getAuthentication(info) {
+    return _fakeAuthentication(info);
 }

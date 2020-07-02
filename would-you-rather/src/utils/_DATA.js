@@ -2,7 +2,7 @@ let users = {
     amanda_seyfried: {
         id: 'amanda_seyfried',
         name: 'Amanda SeyFried',
-        avatarURL: 'person.jpg',
+        avatarURL: '../assets/images/amanda_avatar.jpg',
         questions: ['sxwoy62xhg84mvcb5jo8x', 'daxuh2znt8vquvacvhh2s'],
         answered: {
             sxwoy62xhg84mvcb5jo8x: 'questions_0',
@@ -15,7 +15,7 @@ let users = {
     idris_elba: {
         id: 'idris_elba',
         name: 'Idris Elba',
-        avatarURL: 'person.jpg',
+        avatarURL: '../assets/images/idris_avatar.jpg',
         questions: [],
         answered: {
             sxwoy62xhg84mvcb5jo8x: 'questions_1',
@@ -28,7 +28,7 @@ let users = {
     louise_brodeur: {
         id: 'louise_brodeur',
         name: 'Louise Brodeur',
-        avatarURL: 'person.jpg',
+        avatarURL: '../assets/images/louise_avatar.jpg',
         questions: ['vqtjek81va8sfuui0bbgjk', 'h5l2u84zun1lzkkbchgwx'],
         answered: {
             sxwoy62xhg84mvcb5jo8x: 'questions_1',
@@ -38,7 +38,7 @@ let users = {
     henry_james: {
         id: 'henry_james',
         name: 'Henry James',
-        avatarURL: 'person.jpg',
+        avatarURL: '../assets/images/henry_avatar.jpg',
         questions: ['p3ybk5ed2hkc70l00549', 'ksnyqn1anhevvftlk7rwi'],
         answered: {
             sxwoy62xhg84mvcb5jo8x: 'questions_0',
@@ -231,5 +231,11 @@ export function _savePollAnswer({ qid, answer, authedUser }) {
 
             res();
         }, 300);
+    });
+}
+
+export function _fakeAuthentication() {
+    return new Promise((res, rej) => {
+        setTimeout(() => res(), 1000);
     });
 }

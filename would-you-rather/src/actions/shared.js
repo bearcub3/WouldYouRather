@@ -1,4 +1,4 @@
-import { getInitialData } from '../utils/api';
+import { getInitialData, getAuthentication } from '../utils/api';
 import { receiveUsers } from '../actions/users';
 import { receivePolls } from '../actions/polls';
 import { setAuthedUser } from '../actions/authedUser';
@@ -14,6 +14,15 @@ export function handleInitialData() {
             dispatch(receivePolls(polls));
             dispatch(setAuthedUser(AUTHED_ID));
             dispatch(hideLoading());
+        });
+    };
+}
+
+export function handleLogIn(id) {
+    return (dispatch) => {
+        dispatch(setAuthedUser(id));
+        return getAuthentication(id).catch((e) => {
+            console.warn('Error occours', e);
         });
     };
 }
