@@ -1,10 +1,10 @@
-import React, { Fragment, useEffect } from 'react';
+import React, { Fragment } from 'react';
 import styled from 'styled-components';
 import { connect } from 'react-redux';
-import Avatar from './Avatar';
 import { Link, withRouter } from 'react-router-dom';
 import { device } from '../utils/device-unit';
 import { useAuth } from '../context/auth';
+import ProfileContainer from './ProfileContainer';
 
 const Li = styled(Link)`
     color: #0a014f;
@@ -52,22 +52,6 @@ const Nav = styled.nav`
     }
 `;
 
-const ProfileContainer = styled.div`
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin: 0 auto;
-    height: 100px;
-`;
-
-const User = styled.p`
-    font-size: 0.85rem;
-
-    @media ${device.tablet} {
-        font-size: 1rem;
-    }
-`;
-
 function Navigation(props) {
     const { authTokens } = useAuth();
     const { users, handleNav } = props;
@@ -89,10 +73,10 @@ function Navigation(props) {
                     </Li>
                     {users[authTokens] ? (
                         <Fragment>
-                            <ProfileContainer>
-                                <Avatar img={users[authTokens].avatarURL} />
-                                <User>{users[authTokens].name}</User>
-                            </ProfileContainer>
+                            <ProfileContainer
+                                userAvatar={users[authTokens].avatarURL}
+                                userName={users[authTokens].name}
+                            />
                         </Fragment>
                     ) : (
                         <Li to={`/login`} onClick={() => handleNav(false)}>
@@ -107,10 +91,10 @@ function Navigation(props) {
 
                     {users[authTokens] ? (
                         <Fragment>
-                            <ProfileContainer>
-                                <Avatar img={users[authTokens].avatarURL} />
-                                <User>{users[authTokens].name}</User>
-                            </ProfileContainer>
+                            <ProfileContainer
+                                userAvatar={users[authTokens].avatarURL}
+                                userName={users[authTokens].name}
+                            />
                         </Fragment>
                     ) : (
                         <Li to={`/login`}>Log In</Li>
