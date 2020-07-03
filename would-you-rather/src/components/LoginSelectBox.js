@@ -1,11 +1,9 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
-import { handleLogIn } from '../actions/shared';
 import { IconContext } from 'react-icons';
 import { FiChevronDown, FiChevronUp } from 'react-icons/fi';
 import Avatar from './Avatar';
-import { Link, withRouter } from 'react-router-dom';
-import { device } from '../utils/device-unit';
+import { useAuth } from '../context/auth';
 
 const SelectBox = styled.div`
     display: grid;
@@ -35,11 +33,11 @@ const LoginBTN = styled.button`
     }
 `;
 
-/* TODO: it may be more user friendly to save user id to cookie  */
-
 function LoginSelectBox(props) {
     /*  memory leak risk : https://reactjs.org/docs/hooks-effect.html */
     const [isOpen, setOpen] = useState(false);
+    const { setAuthTokens } = useAuth();
+
     const users = [];
     Object.entries(props.userlist).map((user) => users.push(user[1]));
 
@@ -65,21 +63,22 @@ function LoginSelectBox(props) {
             </IconContext.Provider>
             {users.map((user) => (
                 <div key={user.id} style={isOpen ? {} : { display: `none` }}>
-                    <Link to={`/`} style={{ textDecoration: `none` }}>
-                        <LoginBTN
-                            onClick={() => {
-                                props.dispatch(handleLogIn(user.id));
-                                setTimeout(() => setOpen(!isOpen), 300);
-                            }}
-                        >
-                            <Avatar img={user.avatarURL} />
-                            {user.name}
-                        </LoginBTN>
-                    </Link>
+                    <LoginBTN
+                        onClick={() => {
+                            setAuthTokens(user.id);
+                            props.handleLoginState(true);
+                            setTimeout(() => {
+                                setOpen(!isOpen);
+                            }, 300);
+                        }}
+                    >
+                        <Avatar img={user.avatarURL} />
+                        {user.name}
+                    </LoginBTN>
                 </div>
             ))}
         </div>
     );
 }
 
-export default withRouter(LoginSelectBox);
+export default LoginSelectBox;

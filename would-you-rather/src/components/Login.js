@@ -1,7 +1,8 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 import { connect } from 'react-redux';
 import LoginSelectBox from './LoginSelectBox';
+import { Redirect } from 'react-router-dom';
 import { device } from '../utils/device-unit';
 
 const LoginContainer = styled.div`
@@ -19,6 +20,16 @@ const LoginContainer = styled.div`
 `;
 
 function Login(props) {
+    const [isLoggedIn, setLoggedIn] = useState(false);
+
+    const handleLoginState = (state) => {
+        setLoggedIn(state);
+    };
+
+    if (isLoggedIn) {
+        return <Redirect to="/" />;
+    }
+
     return (
         <LoginContainer>
             <div
@@ -36,6 +47,7 @@ function Login(props) {
                 <LoginSelectBox
                     userlist={props.users}
                     dispatch={props.dispatch}
+                    handleLoginState={handleLoginState}
                 />
             </div>
         </LoginContainer>

@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import Avatar from './Avatar';
 import { Link, withRouter } from 'react-router-dom';
 import { device } from '../utils/device-unit';
+import { useAuth } from '../context/auth';
 
 const Li = styled(Link)`
     color: #0a014f;
@@ -51,6 +52,14 @@ const Nav = styled.nav`
     }
 `;
 
+const ProfileContainer = styled.div`
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto;
+    height: 100px;
+`;
+
 const User = styled.p`
     font-size: 0.85rem;
 
@@ -60,10 +69,8 @@ const User = styled.p`
 `;
 
 function Navigation(props) {
-    useEffect(() => {
-        console.log(props);
-    });
-    const { authedUser, users, handleNav } = props;
+    const { authTokens } = useAuth();
+    const { users, handleNav } = props;
 
     return (
         <Nav>
@@ -80,22 +87,12 @@ function Navigation(props) {
                     <Li to={`/leaderboard`} onClick={() => handleNav(false)}>
                         Leader Board
                     </Li>
-                    {authedUser !== null ? (
+                    {users[authTokens] ? (
                         <Fragment>
-                            <div
-                                style={{
-                                    display: `flex`,
-                                    alignItems: `center`,
-                                    justifyContent: `center`,
-                                    margin: `0 auto`,
-                                    height: `100px`,
-                                }}
-                            >
-                                <Avatar
-                                    img={users[props.authedUser].avatarURL}
-                                />
-                                <User>{users[props.authedUser].name}</User>
-                            </div>
+                            <ProfileContainer>
+                                <Avatar img={users[authTokens].avatarURL} />
+                                <User>{users[authTokens].name}</User>
+                            </ProfileContainer>
                         </Fragment>
                     ) : (
                         <Li to={`/login`} onClick={() => handleNav(false)}>
@@ -107,22 +104,13 @@ function Navigation(props) {
                 <Fragment>
                     <Li to={`/questions`}>New Poll</Li>
                     <Li to={`/leaderboard`}>Leader Board</Li>
-                    {authedUser !== null ? (
+
+                    {users[authTokens] ? (
                         <Fragment>
-                            <div
-                                style={{
-                                    display: `flex`,
-                                    alignItems: `center`,
-                                    justifyContent: `center`,
-                                    margin: `0 auto`,
-                                    height: `100px`,
-                                }}
-                            >
-                                <Avatar
-                                    img={users[props.authedUser].avatarURL}
-                                />
-                                <User>{users[props.authedUser].name}</User>
-                            </div>
+                            <ProfileContainer>
+                                <Avatar img={users[authTokens].avatarURL} />
+                                <User>{users[authTokens].name}</User>
+                            </ProfileContainer>
                         </Fragment>
                     ) : (
                         <Li to={`/login`}>Log In</Li>
@@ -133,9 +121,8 @@ function Navigation(props) {
     );
 }
 
-function mapStateToProps({ authedUser, users, dispatch }) {
+function mapStateToProps({ users, dispatch }) {
     return {
-        authedUser,
         users,
         dispatch,
     };

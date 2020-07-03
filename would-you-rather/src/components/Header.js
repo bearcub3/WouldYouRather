@@ -27,7 +27,7 @@ const HeaderWrapper = styled.header`
     }
 `;
 
-function Header() {
+function Header(props) {
     const [isMobile, setDevice] = useState(false);
     const { ref } = useResizeObserver({
         onResize: ({ width }) => {
