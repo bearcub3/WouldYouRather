@@ -55,15 +55,15 @@ let polls = {
         id: 'vqtjek81va8sfuui0bbgjk',
         creator: 'louise_brodeur',
         questions_0: {
-            0: 'Would you rather be a front-end developer',
+            question: 'Would you rather be a front-end developer',
             votes: null,
         },
         questions_1: {
-            1: 'Would you rather be a back-end developer',
+            question: 'Would you rather be a back-end developer',
             votes: null,
         },
         questions_2: {
-            2: 'Would you rather be a full stack developer',
+            question: 'Would you rather be a full stack developer',
             votes: null,
         },
         timestamp: 1593108626,
@@ -139,10 +139,6 @@ let polls = {
     },
 };
 
-let globalEventStatus = {
-    logout: false,
-};
-
 export function _getUsers() {
     return new Promise((res, rej) => {
         setTimeout(() => res({ ...users }), 1000);
@@ -152,12 +148,6 @@ export function _getUsers() {
 export function _getPolls() {
     return new Promise((res, rej) => {
         setTimeout(() => res({ ...polls }), 1000);
-    });
-}
-
-export function _getglobalEventStatus() {
-    return new Promise((res, rej) => {
-        setTimeout(() => res({ ...globalEventStatus }), 1000);
     });
 }
 
@@ -188,20 +178,6 @@ function formatQuestion({ creator, ...questions }) {
         },
         timestamp: Date.now(),
     };
-}
-
-export function _saveGlobalStatus({ status, type }) {
-    return new Promise((res, rej) => {
-        setTimeout(() =>
-            res(
-                (globalEventStatus = {
-                    ...globalEventStatus,
-                    [type]: status,
-                }),
-                500
-            )
-        );
-    });
 }
 
 export function _savePoll(question) {

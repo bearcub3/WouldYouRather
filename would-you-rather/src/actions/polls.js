@@ -1,4 +1,4 @@
-import { savePollAnswer, savePollQuestion } from '../utils/api';
+// import { savePollAnswer, savePollQuestion } from '../utils/api';
 
 export const RECEIVE_POLLS = 'RECEIVE_POLLS';
 export const SAVE_POLL_QUESTIONS = 'SAVE_POLL_QUESTIONS';
@@ -11,9 +11,9 @@ export function receivePolls(polls) {
     };
 }
 
-function savePoll(poll) {
-    return {
-        type: SAVE_POLL_QUESTIONS,
-        poll,
-    };
-}
+// function savePoll(poll) {
+//     return {
+//         type: SAVE_POLL_QUESTIONS,
+//         poll,
+//     };
+// }

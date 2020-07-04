@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import propTypes from 'prop-types';
 import styled from 'styled-components';
 import useResizeObserver from 'use-resize-observer';
 import Navigation from './Navigation';
@@ -27,7 +26,7 @@ const HeaderWrapper = styled.header`
     }
 `;
 
-function Header(props) {
+function Header() {
     const [isMobile, setDevice] = useState(false);
     const { ref } = useResizeObserver({
         onResize: ({ width }) => {

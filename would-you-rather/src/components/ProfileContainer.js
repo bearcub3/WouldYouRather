@@ -4,6 +4,7 @@ import styled from 'styled-components';
 import { device } from '../utils/device-unit';
 import Avatar from './Avatar';
 import { useAuth } from '../context/auth';
+import { Link } from 'react-router-dom';
 
 const AvatarContainer = styled.div`
     display: flex;
@@ -26,7 +27,7 @@ const User = styled.p`
 const LogoutToolTip = styled.div`
     position: absolute;
     top: 80px;
-    left: 30px;
+    margin: 0 auto;
     display: grid;
     align-items: center;
     grid-template-rows: repeat(2, 1fr);
@@ -38,12 +39,14 @@ const LogoutToolTip = styled.div`
     cursor: pointer;
 `;
 
-const Link = styled.p`
+const LinkEl = styled(Link)`
     margin: 0.5rem 0;
     font-size: 0.85rem;
     font-weight: 500;
     line-height: 1.5;
     text-align: center;
+    text-decoration: none;
+    color: #0a014f;
 
     &:last-of-type {
         grid-row: 2/3;
@@ -56,7 +59,7 @@ const Link = styled.p`
 
 function ProfileContainer(props) {
     const { setAuthTokens } = useAuth();
-    const { userAvatar, userName } = props;
+    const { userAvatar, userName, handleNav } = props;
     const [isClicked, setClicked] = useState(false);
     const [isLoggedOut, setLoggedOut] = useState(false);
     return (
@@ -65,18 +68,20 @@ function ProfileContainer(props) {
             <User>{userName}</User>
             {isClicked && (
                 <LogoutToolTip>
-                    <Link>My Profile</Link>
-                    <Link
+                    <LinkEl>My Profile</LinkEl>
+                    <LinkEl
                         onClick={() => {
                             setAuthTokens('');
                             setLoggedOut(!isLoggedOut);
                             setTimeout(() => {
                                 setClicked(!isClicked);
+                                handleNav(false);
                             }, 300);
                         }}
+                        to="/login"
                     >
                         Log Out
-                    </Link>
+                    </LinkEl>
                 </LogoutToolTip>
             )}
         </AvatarContainer>

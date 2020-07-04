@@ -17,7 +17,7 @@ function App(props) {
     const { dispatch } = props;
     useEffect(() => {
         dispatch(handleInitialData());
-    });
+    }, []);
 
     const regex = /[^=]*$/;
     const tokens = document.cookie.match(regex)[0];
@@ -39,21 +39,22 @@ function App(props) {
                     style={{ backgroundColor: `#0A014F`, height: `3px` }}
                 />
                 <Header />
-                <div
+                <main
                     style={{
-                        height: `65vh`,
                         display: `flex`,
                         alignItems: `center`,
                         justifyContent: `center`,
                     }}
                 >
                     <Switch>
-                        <Route path="/" exact component={Home} />
-                        <PrivateRoute path="/questions" component={Poll} />
+                        <Route path="/" exact>
+                            <Home />
+                        </Route>
+                        <PrivateRoute path="/questions" />
                         <Route path="/login" component={Login} />
                         <Route component={NotFound} />
                     </Switch>
-                </div>
+                </main>
             </div>
         </AuthContext.Provider>
     );
@@ -63,10 +64,4 @@ App.propTypes = {
     dispatch: propTypes.func,
 };
 
-function mapStateToProps({ authedUser }) {
-    return {
-        authedUser,
-    };
-}
-
-export default connect(mapStateToProps)(App);
+export default connect()(App);

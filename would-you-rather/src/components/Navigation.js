@@ -76,6 +76,7 @@ function Navigation(props) {
                             <ProfileContainer
                                 userAvatar={users[authTokens].avatarURL}
                                 userName={users[authTokens].name}
+                                handleNav={handleNav}
                             />
                         </Fragment>
                     ) : (

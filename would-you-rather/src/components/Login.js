@@ -4,12 +4,13 @@ import { connect } from 'react-redux';
 import LoginSelectBox from './LoginSelectBox';
 import { Redirect } from 'react-router-dom';
 import { device } from '../utils/device-unit';
+import { useAuth } from '../context/auth';
 
 const LoginContainer = styled.div`
     width: 50%;
     height: 200px;
     display: flex;
-    justifycontent: center;
+    justify-content: center;
     border-radius: 0.8rem;
     border: 4px solid #0a014f;
 
@@ -20,6 +21,7 @@ const LoginContainer = styled.div`
 `;
 
 function Login(props) {
+    const { authTokens } = useAuth();
     const [isLoggedIn, setLoggedIn] = useState(false);
 
     const handleLoginState = (state) => {
@@ -27,6 +29,11 @@ function Login(props) {
     };
 
     if (isLoggedIn) {
+        return <Redirect to="/" />;
+    }
+
+    if (authTokens) {
+        // TODO: history would be better
         return <Redirect to="/" />;
     }
 

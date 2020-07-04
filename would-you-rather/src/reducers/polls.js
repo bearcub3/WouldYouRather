@@ -7,6 +7,7 @@ export default function polls(state = {}, action) {
                 ...state,
                 ...action.polls,
             };
+
         default:
             return state;
     }
