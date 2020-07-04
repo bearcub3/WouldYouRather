@@ -64,7 +64,7 @@ function ProfileContainer(props) {
     const [isLoggedOut, setLoggedOut] = useState(false);
     return (
         <AvatarContainer onClick={() => setClicked(!isClicked)}>
-            <Avatar img={userAvatar} />
+            <Avatar img={userAvatar} size={40} />
             <User>{userName}</User>
             {isClicked && (
                 <LogoutToolTip>

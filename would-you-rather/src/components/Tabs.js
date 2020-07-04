@@ -25,12 +25,13 @@ const TabWrapper = styled.div`
     grid-gap: 14px;
 `;
 
-function TabManager(props) {
+function Tabs(props) {
     const { activeTab, handleTab, tabs } = props;
     return (
         <TabWrapper>
             {tabs.map(({ label, value }) => (
                 <TabContainer
+                    key={label}
                     color={`${value === activeTab ? '#0A014F' : '#fff'}`}
                     bgColor={`${value === activeTab ? '#fff' : '#0A014F'}`}
                     onClick={() => {
@@ -44,10 +45,10 @@ function TabManager(props) {
     );
 }
 
-TabManager.propTypes = {
+Tabs.propTypes = {
     activeTab: PropTypes.number.isRequired,
     handleTab: PropTypes.func.isRequired,
     tabs: PropTypes.arrayOf(Object).isRequired,
 };
 
-export default TabManager;
+export default Tabs;

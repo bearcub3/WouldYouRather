@@ -1,9 +1,9 @@
-import React, { useState } from 'react';
+import React, { useState, useMemo } from 'react';
 import { connect } from 'react-redux';
 import styled from 'styled-components';
-
+import { TabContext } from '../context/tabs';
 import Tabs from './Tabs';
-import Poll from './Poll';
+import PollContainer from './PollContainer';
 
 const TabsContent = [
     { label: 'Unanswered Polls', value: 0 },
@@ -12,20 +12,25 @@ const TabsContent = [
 
 function Home(props) {
     const { questions } = props;
-    const [activeTab, handleTab] = useState(0);
+    const [activeTab, setTab] = useState(0);
+
+    const handleTab = (data) => {
+        setTab(data);
+    };
 
     return (
-        <div style={{ width: `90%` }}>
-            <Tabs
-                tabs={TabsContent}
-                activeTab={activeTab}
-                handleTab={handleTab}
-            />
-
-            {questions.map((id) => (
-                <Poll key={id} id={id} />
-            ))}
-        </div>
+        <TabContext.Provider value={{ activeTab, controlTabView: handleTab }}>
+            <div style={{ width: `90%` }}>
+                <Tabs
+                    tabs={TabsContent}
+                    activeTab={activeTab}
+                    handleTab={handleTab}
+                />
+                {questions.map((id) => (
+                    <PollContainer key={id} id={id} />
+                ))}
+            </div>
+        </TabContext.Provider>
     );
 }
 

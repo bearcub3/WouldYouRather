@@ -9,7 +9,6 @@ import PrivateRoute from '../PrivateRoute';
 
 import Header from './Header';
 import Home from './Home';
-import Poll from './Poll';
 import Login from './Login';
 import NotFound from '../pages/404';
 

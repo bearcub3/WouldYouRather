@@ -5,9 +5,9 @@ const ProfileAvatar = styled.div`
     background-image: url(${(props) => props.img});
     background-size: cover;
     background-position: center center;
-    width: 40px;
-    height: 40px;
-    border-radius: 40px;
+    width: ${(props) => `${props.size}px`};
+    height: ${(props) => `${props.size}px`};
+    border-radius: ${(props) => `${props.size}px`};
     display: inline-block;
     border: 3px solid #cd9fcc;
     margin: 0 1rem;
@@ -15,7 +15,7 @@ const ProfileAvatar = styled.div`
 `;
 
 function Avatar(props) {
-    return <ProfileAvatar img={props.img} />;
+    return <ProfileAvatar img={props.img} size={props.size} />;
 }
 
 export default Avatar;
