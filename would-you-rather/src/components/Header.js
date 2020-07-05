@@ -38,7 +38,7 @@ function Header() {
         },
     });
     return (
-        <HeaderWrapper>
+        <HeaderWrapper ref={ref}>
             <Link to={`/`} style={{ textDecoration: `none` }}>
                 <H1>Would You Rather?</H1>
             </Link>
