@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Fragment } from 'react';
 import propTypes from 'prop-types';
 import { connect } from 'react-redux';
 import styled from 'styled-components';
@@ -6,11 +6,11 @@ import { useTabs } from '../context/tabs';
 import Poll from './Poll';
 
 const TabContainer0 = styled.div`
-    display: ${(props) => (props.active === 0 ? `none` : `grid`)};
+    display: ${(props) => (props.active === 0 ? `none` : `block`)};
 `;
 
 const TabContainer1 = styled.div`
-    display: ${(props) => (props.active === 1 ? `none` : `grid`)};
+    display: ${(props) => (props.active === 1 ? `none` : `block`)};
 `;
 
 function PollContainer(props) {
@@ -20,24 +20,18 @@ function PollContainer(props) {
     console.log(category);
 
     return (
-        <div>
-            <TabContainer0 active={activeTab}>
-                {category.answered && (
-                    <div>
-                        <span>Answered</span>
-                        <Poll category={category} />
-                    </div>
-                )}
-            </TabContainer0>
-            <TabContainer1 active={activeTab}>
-                {!category.answered && (
-                    <div>
-                        <span>Unanswered</span>
-                        <Poll category={category} />
-                    </div>
-                )}
-            </TabContainer1>
-        </div>
+        <Fragment>
+            {category.answered && (
+                <TabContainer0 active={activeTab}>
+                    <Poll category={category} />
+                </TabContainer0>
+            )}
+            {!category.answered && (
+                <TabContainer1 active={activeTab}>
+                    <Poll category={category} />
+                </TabContainer1>
+            )}
+        </Fragment>
     );
 }
 

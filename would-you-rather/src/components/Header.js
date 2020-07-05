@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import useResizeObserver from 'use-resize-observer';
 
@@ -39,9 +38,8 @@ function Header() {
     });
     return (
         <HeaderWrapper ref={ref}>
-            <Link to={`/`} style={{ textDecoration: `none` }}>
-                <H1>Would You Rather?</H1>
-            </Link>
+            <H1>Would You Rather?</H1>
+
             {isMobile ? <Hamburger /> : <Navigation />}
         </HeaderWrapper>
     );

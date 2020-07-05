@@ -28,12 +28,7 @@ function Login(props) {
         setLoggedIn(state);
     };
 
-    if (isLoggedIn) {
-        return <Redirect to="/User" />;
-    }
-
-    if (authTokens) {
-        // TODO: history would be better
+    if (authTokens && isLoggedIn) {
         return <Redirect to="/" />;
     }
 

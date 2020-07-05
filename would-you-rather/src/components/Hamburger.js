@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, Fragment } from 'react';
 import styled from 'styled-components';
 import Navigation from './Navigation';
 
@@ -91,7 +91,7 @@ const Element = styled.div`
 function Hamburger() {
     const [isActive, setActive] = useState(false);
     return (
-        <>
+        <Fragment>
             <Ham
                 className={isActive ? 'isActive' : ''}
                 onClick={() => setActive(!isActive)}
@@ -101,7 +101,7 @@ function Hamburger() {
                 </Wrapper>
             </Ham>
             {isActive ? <Navigation handleNav={setActive} /> : ''}
-        </>
+        </Fragment>
     );
 }
 

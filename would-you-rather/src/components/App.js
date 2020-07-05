@@ -16,9 +16,6 @@ import NotFound from '../pages/404';
 
 function App(props) {
     const { dispatch } = props;
-    useEffect(() => {
-        dispatch(handleInitialData());
-    }, [dispatch]);
 
     const regex = /[^=]*$/;
     const tokens = document.cookie.match(regex)[0];
@@ -28,6 +25,10 @@ function App(props) {
         document.cookie = `username=${data}`;
         setAuthTokens(data);
     };
+
+    useEffect(() => {
+        dispatch(handleInitialData());
+    }, [dispatch]);
 
     useEffect(() => {
         dispatch(handleAuthentication(authTokens));
@@ -46,11 +47,13 @@ function App(props) {
                         alignItems: `center`,
                         justifyContent: `center`,
                         minHeight: `60vh`,
+                        flexDirection: `column`,
                     }}
                 >
                     <Switch>
-                        <Route path="/" exact />
-                        <PrivateRoute path="/User" component={Home} />
+                        {/* // TODO: if user hasn't been logged in let them know to
+                        log in first before use the app */}
+                        <PrivateRoute path="/" exact component={Home} />
                         <PrivateRoute path="/questions" component={Temp} />
                         <Route path="/login" component={Login} />
                         <Route component={NotFound} />

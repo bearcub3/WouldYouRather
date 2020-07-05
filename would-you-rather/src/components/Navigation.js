@@ -2,8 +2,11 @@ import React, { Fragment } from 'react';
 import styled from 'styled-components';
 import { connect } from 'react-redux';
 import { Link, withRouter } from 'react-router-dom';
+
 import { device } from '../utils/device-unit';
 import { useAuth } from '../context/auth';
+import { FiLogIn } from 'react-icons/fi';
+
 import ProfileContainer from './ProfileContainer';
 
 const Li = styled(Link)`
@@ -14,7 +17,7 @@ const Li = styled(Link)`
     align-items: center;
     justify-content: center;
     text-decoration: none;
-    transition: all 0.8s ease-out;
+    transition: background-color 0.8s ease-out;
     padding: 0.5rem;
     border-radius: 1rem;
     height: 15px;
@@ -22,11 +25,29 @@ const Li = styled(Link)`
     &:hover {
         background-color: rgba(250, 232, 235, 0.7);
     }
+
     @media ${device.tablet} {
-        margin: 0 auto;
         width: 70%;
         font-size: 1.3rem;
         border-radius: 2rem;
+        display: block;
+        position: absolute;
+        left: 50%;
+        transform: translateX(-50%);
+        height: 25px;
+        padding: 0.8rem 0;
+
+        &:first-of-type {
+            margin-top: 45%;
+        }
+
+        &:nth-of-type(2) {
+            margin-top: 57%;
+        }
+
+        &:last-of-type {
+            margin-top: ${(props) => `${props.position}%`};
+        }
     }
 `;
 
@@ -39,16 +60,22 @@ const Nav = styled.nav`
 
     @media ${device.tablet} {
         position: absolute;
-        left: 50%;
-        margin-top: 35%;
-        transform: translateX(-50%);
+        top: 0;
+        left: 0;
         width: 100%;
         height: 100vh;
-        grid-template-columns: 1fr;
-        grid-template-rows: repeat(3, 70px);
-        justify-content: center;
+        display: block;
+        margin: 0 auto;
+        z-index: 9990;
         background-color: #fff;
-        z-index: 99999;
+        text-align: center;
+    }
+
+    & > div:last-child {
+        @media ${device.tablet} {
+            margin-top: 69%;
+            margin-left: -3%;
+        }
     }
 `;
 
@@ -80,8 +107,20 @@ function Navigation(props) {
                             />
                         </Fragment>
                     ) : (
-                        <Li to={`/login`} onClick={() => handleNav(false)}>
-                            Log In
+                        <Li
+                            to="/login"
+                            onClick={() => handleNav(false)}
+                            position={69}
+                        >
+                            <FiLogIn />
+                            <span
+                                style={{
+                                    display: `inline-block`,
+                                    paddingLeft: `10px`,
+                                }}
+                            >
+                                Log In
+                            </span>
                         </Li>
                     )}
                 </Fragment>
@@ -98,7 +137,17 @@ function Navigation(props) {
                             />
                         </Fragment>
                     ) : (
-                        <Li to={`/login`}>Log In</Li>
+                        <Li to="/login" position={69}>
+                            <FiLogIn />
+                            <span
+                                style={{
+                                    display: `inline-block`,
+                                    paddingLeft: `10px`,
+                                }}
+                            >
+                                Log In
+                            </span>
+                        </Li>
                     )}
                 </Fragment>
             )}

@@ -1,10 +1,13 @@
 import React, { useState } from 'react';
 import propTypes from 'prop-types';
-import styled from 'styled-components';
-import { device } from '../utils/device-unit';
-import Avatar from './Avatar';
-import { useAuth } from '../context/auth';
 import { Link } from 'react-router-dom';
+import styled from 'styled-components';
+
+import { useAuth } from '../context/auth';
+import { FiUser, FiLogOut } from 'react-icons/fi';
+import { device } from '../utils/device-unit';
+
+import Avatar from './Avatar';
 
 const AvatarContainer = styled.div`
     display: flex;
@@ -31,7 +34,7 @@ const LogoutToolTip = styled.div`
     display: grid;
     align-items: center;
     grid-template-rows: repeat(2, 1fr);
-    width: 120px;
+    width: 150px;
     border: 1px solid #e0e0e0;
     background-color: #fff;
     border-radius: 5px;
@@ -40,16 +43,19 @@ const LogoutToolTip = styled.div`
 `;
 
 const LinkEl = styled(Link)`
-    margin: 0.5rem 0;
-    font-size: 0.85rem;
-    font-weight: 500;
+    margin: 0.5rem 0 0 1.5rem;
+    font-size: 0.9rem;
+    font-weight: 600;
     line-height: 1.5;
     text-align: center;
     text-decoration: none;
     color: #0a014f;
+    display: flex;
+    align-items: center;
 
     &:last-of-type {
         grid-row: 2/3;
+        margin-bottom: 0.8rem;
     }
 
     &:hover {
@@ -69,7 +75,17 @@ function ProfileContainer(props) {
             {isClicked && (
                 <LogoutToolTip>
                     {/* // TODO: fix */}
-                    <LinkEl to="/">My Profile</LinkEl>
+                    <LinkEl to="/">
+                        <FiUser size="1.2rem" />
+                        <span
+                            style={{
+                                display: `inline-block`,
+                                paddingLeft: `10px`,
+                            }}
+                        >
+                            My Profile
+                        </span>
+                    </LinkEl>
                     <LinkEl
                         onClick={() => {
                             setAuthTokens('');
@@ -81,7 +97,15 @@ function ProfileContainer(props) {
                         }}
                         to="/login"
                     >
-                        Log Out
+                        <FiLogOut size="1.2rem" />
+                        <span
+                            style={{
+                                display: `inline-block`,
+                                paddingLeft: `10px`,
+                            }}
+                        >
+                            Log Out
+                        </span>
                     </LinkEl>
                 </LogoutToolTip>
             )}
