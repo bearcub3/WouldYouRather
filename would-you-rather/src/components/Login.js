@@ -29,7 +29,7 @@ function Login(props) {
     };
 
     if (isLoggedIn) {
-        return <Redirect to="/" />;
+        return <Redirect to="/User" />;
     }
 
     if (authTokens) {

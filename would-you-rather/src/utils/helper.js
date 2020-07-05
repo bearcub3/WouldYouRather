@@ -26,27 +26,3 @@ export function formatPoll(poll, user) {
         avatar: avatarURL,
     };
 }
-
-export function categorizePolls(poll, authedUser, users) {
-    const {
-        id,
-        creator,
-        timestamp,
-        questions_0,
-        questions_1,
-        questions_2,
-    } = poll;
-    const { answered } = users[authedUser];
-
-    return {
-        id,
-        timestamp,
-        creator: users[creator].name,
-        avatar: users[creator].avatarURL,
-        questions_0,
-        questions_1,
-        questions_2,
-        answer: answered[id],
-        answered: !!answered[id],
-    };
-}

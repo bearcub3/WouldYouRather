@@ -1,6 +1,6 @@
-import React, { useState, useMemo } from 'react';
+import React, { useState } from 'react';
+import propTypes from 'prop-types';
 import { connect } from 'react-redux';
-import styled from 'styled-components';
 import { TabContext } from '../context/tabs';
 import Tabs from './Tabs';
 import PollContainer from './PollContainer';
@@ -41,5 +41,9 @@ function mapStateToProps({ polls }) {
         ),
     };
 }
+
+Home.propTypes = {
+    questions: propTypes.array.isRequired,
+};
 
 export default connect(mapStateToProps)(Home);

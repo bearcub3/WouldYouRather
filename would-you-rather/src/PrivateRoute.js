@@ -1,8 +1,8 @@
 import React from 'react';
-import { Route, Redirect } from 'react-router-dom';
+import { Redirect, Route } from 'react-router-dom';
 import { useAuth } from './context/auth.js';
 
-function PrivateRoute({ component: Component, ...rest }) {
+export default function PrivateRoute({ component: Component, ...rest }) {
     const { authTokens } = useAuth();
     return (
         <Route
@@ -13,5 +13,3 @@ function PrivateRoute({ component: Component, ...rest }) {
         />
     );
 }
-
-export default PrivateRoute;

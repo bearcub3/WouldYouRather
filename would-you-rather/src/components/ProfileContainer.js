@@ -68,14 +68,15 @@ function ProfileContainer(props) {
             <User>{userName}</User>
             {isClicked && (
                 <LogoutToolTip>
-                    <LinkEl>My Profile</LinkEl>
+                    {/* // TODO: fix */}
+                    <LinkEl to="/">My Profile</LinkEl>
                     <LinkEl
                         onClick={() => {
                             setAuthTokens('');
                             setLoggedOut(!isLoggedOut);
                             setTimeout(() => {
                                 setClicked(!isClicked);
-                                handleNav(false);
+                                handleNav && handleNav(false);
                             }, 300);
                         }}
                         to="/login"

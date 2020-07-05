@@ -68,7 +68,7 @@ function Navigation(props) {
                     >
                         New Poll
                     </Li>
-                    <Li to={`/leaderboard`} onClick={() => handleNav(false)}>
+                    <Li to="/leaderboard" onClick={() => handleNav(false)}>
                         Leader Board
                     </Li>
                     {users[authTokens] ? (

@@ -10,19 +10,21 @@ let users = {
             p3ybk5ed2hkc70l00549: 'questions_0',
             ksnyqn1anhevvftlk7rwi: 'questions_1',
             h5l2u84zun1lzkkbchgwx: 'questions_1',
+            vv8do8ddnibhsscmgi4ys: 'questions_1',
         },
     },
     idris_elba: {
         id: 'idris_elba',
         name: 'Idris Elba',
         avatarURL: '../assets/images/idris_avatar.jpg',
-        questions: [],
+        questions: ['vv8do8ddnibhsscmgi4ys'],
         answered: {
             sxwoy62xhg84mvcb5jo8x: 'questions_1',
             daxuh2znt8vquvacvhh2s: 'questions_1',
             p3ybk5ed2hkc70l00549: 'questions_2',
             ksnyqn1anhevvftlk7rwi: 'questions_1',
             h5l2u84zun1lzkkbchgwx: 'questions_0',
+            vv8do8ddnibhsscmgi4ys: 'questions_1',
         },
     },
     louise_brodeur: {
@@ -33,6 +35,7 @@ let users = {
         answered: {
             sxwoy62xhg84mvcb5jo8x: 'questions_1',
             daxuh2znt8vquvacvhh2s: 'questions_1',
+            vv8do8ddnibhsscmgi4ys: 'questions_0',
         },
     },
     henry_james: {
@@ -46,6 +49,7 @@ let users = {
             p3ybk5ed2hkc70l00549: 'questions_1',
             ksnyqn1anhevvftlk7rwi: 'questions_0',
             h5l2u84zun1lzkkbchgwx: 'questions_0',
+            vv8do8ddnibhsscmgi4ys: 'questions_0',
         },
     },
 };
@@ -136,6 +140,19 @@ let polls = {
             votes: ['amanda_seyfried'],
         },
         timestamp: 1593617459,
+    },
+    vv8do8ddnibhsscmgi4ys: {
+        id: 'vv8do8ddnibhsscmgi4ys',
+        creator: 'idris_elba',
+        questions_0: {
+            question: 'Would you rather a villain',
+            votes: ['henry_james', 'louise_brodeur'],
+        },
+        questions_1: {
+            question: 'Would you rather a hero',
+            votes: ['amanda_seyfried', 'idris_elba'],
+        },
+        timestamp: 1593518400,
     },
 };
 

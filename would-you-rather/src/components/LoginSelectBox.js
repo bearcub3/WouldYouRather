@@ -72,7 +72,7 @@ function LoginSelectBox(props) {
                             }, 300);
                         }}
                     >
-                        <Avatar img={user.avatarURL} />
+                        <Avatar img={user.avatarURL} size={40} />
                         {user.name}
                     </LoginBTN>
                 </div>

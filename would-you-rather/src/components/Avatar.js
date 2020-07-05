@@ -1,4 +1,5 @@
 import React from 'react';
+import propTypes from 'prop-types';
 import styled from 'styled-components';
 
 const ProfileAvatar = styled.div`
@@ -17,5 +18,10 @@ const ProfileAvatar = styled.div`
 function Avatar(props) {
     return <ProfileAvatar img={props.img} size={props.size} />;
 }
+
+Avatar.propTypes = {
+    img: propTypes.string.isRequired,
+    size: propTypes.number,
+};
 
 export default Avatar;

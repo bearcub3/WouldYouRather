@@ -1,10 +1,12 @@
 import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import useResizeObserver from 'use-resize-observer';
+
+import { device } from '../utils/device-unit';
+
 import Navigation from './Navigation';
 import Hamburger from './Hamburger';
-import { Link } from 'react-router-dom';
-import { device } from '../utils/device-unit';
 
 const H1 = styled.h1`
     font-size: 1.3rem;
@@ -28,13 +30,15 @@ const HeaderWrapper = styled.header`
 
 function Header() {
     const [isMobile, setDevice] = useState(false);
+    // TODO: useResizeObserver doesn't work on safari browser
     const { ref } = useResizeObserver({
         onResize: ({ width }) => {
+            // TODO: this is arbitrary number
             width <= 600 ? setDevice(true) : setDevice(false);
         },
     });
     return (
-        <HeaderWrapper ref={ref}>
+        <HeaderWrapper>
             <Link to={`/`} style={{ textDecoration: `none` }}>
                 <H1>Would You Rather?</H1>
             </Link>

@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { connect } from 'react-redux';
+import React from 'react';
+import propTypes from 'prop-types';
 import styled from 'styled-components';
 import Avatar from './Avatar';
 
@@ -12,13 +12,17 @@ const Container = styled.div`
 `;
 
 function Poll(props) {
-    console.log(props.category);
-    const { avatar } = props.category;
+    const { avatar, creator } = props.category;
     return (
         <Container>
             <Avatar img={avatar} size={120} />
+            <p>{creator}</p>
         </Container>
     );
 }
 
-export default connect()(Poll);
+Poll.propTypes = {
+    category: propTypes.object,
+};
+
+export default Poll;
