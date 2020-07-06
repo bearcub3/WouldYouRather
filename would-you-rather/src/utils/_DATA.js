@@ -60,15 +60,15 @@ let polls = {
         creator: 'louise_brodeur',
         questions_0: {
             question: 'Would you rather be a front-end developer',
-            votes: null,
+            votes: [],
         },
         questions_1: {
             question: 'Would you rather be a back-end developer',
-            votes: null,
+            votes: [],
         },
         questions_2: {
             question: 'Would you rather be a full stack developer',
-            votes: null,
+            votes: [],
         },
         timestamp: 1593108626,
     },
@@ -222,30 +222,29 @@ export function _savePoll(question) {
     });
 }
 
-export function _savePollAnswer({ qid, answer, authedUser }) {
+export function _savePollAnswer({ id, authedUser, userChoice }) {
     return new Promise((res, rej) => {
         setTimeout(() => {
+            polls = {
+                ...polls,
+                [id]: {
+                    ...polls[id],
+                    [userChoice]: {
+                        votes: polls[id][userChoice].votes.concat([authedUser]),
+                    },
+                },
+            };
+
             users = {
                 ...users,
                 [authedUser]: {
                     ...users[authedUser],
                     answered: {
                         ...users[authedUser].answered,
-                        [qid]: answer,
+                        [id]: userChoice,
                     },
                 },
             };
-            polls = {
-                ...polls,
-                [qid]: {
-                    ...polls[qid],
-                    [answer]: {
-                        ...polls[qid][answer],
-                        votes: polls[qid][answer].votes.concat([authedUser]),
-                    },
-                },
-            };
-
             res();
         }, 300);
     });

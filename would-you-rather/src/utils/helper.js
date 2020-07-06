@@ -6,7 +6,7 @@ export function formatDate(timestamp) {
 
 export function formatPoll(poll, user) {
     const {
-        qid,
+        id,
         creator,
         questions_0,
         questions_1,
@@ -16,7 +16,7 @@ export function formatPoll(poll, user) {
     const { name, avatarURL } = user;
 
     return {
-        qid,
+        id,
         creator,
         questions_0,
         questions_1,

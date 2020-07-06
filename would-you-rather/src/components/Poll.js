@@ -1,11 +1,11 @@
 import React from 'react';
 import propTypes from 'prop-types';
 import styled from 'styled-components';
+import { connect } from 'react-redux';
 import { device } from '../utils/device-unit';
-import { Link, Route, withRouter } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 import Avatar from './Avatar';
-//import PollButton from './PollButton';
 
 const Container = styled.div`
     border-radius: 10px;
@@ -70,7 +70,6 @@ const Button = styled(Link)`
 function Poll(props) {
     const { avatar, creator, questions_0, answered, id } = props.category;
     const { category } = props;
-
     const mainQuestion = questions_0['question'];
     return (
         <Container>
@@ -91,12 +90,6 @@ function Poll(props) {
             <Button to={{ pathname: `/${id}`, state: { category } }}>
                 {answered ? 'View Result' : 'Join Vote'}
             </Button>
-
-            {/* <PollButton
-                label={answered ? 'View Result' : 'Join Vote'}
-                id={id}
-                poll={props.category}
-            /> */}
         </Container>
     );
 }
@@ -105,4 +98,4 @@ Poll.propTypes = {
     category: propTypes.object,
 };
 
-export default Poll;
+export default connect()(Poll);

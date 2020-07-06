@@ -32,3 +32,10 @@ Since I use Redux, all the states are stored as one, single source of the truth 
 Redux store updates, mapStateToProps will be called and just like states, mapStateToProps should be an object as well and the object will be passed as props to the component.
 If I don't want to re-render the components when the store updated, pass `null` or `undefined` instead.
 `ownProps` will be called the store state changes or the parent component receives new props(shallow equality comparison).
+
+#### Handling State and Data
+
+1. know the data you need to send to the server and create a function to dispatch
+2. create an action creator ( create a constant for action type as well )
+3. create a reducer to make a state change accordingly
+4. to deal with backend data, create an asynchronous promise
