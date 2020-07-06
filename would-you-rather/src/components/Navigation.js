@@ -11,31 +11,35 @@ import ProfileContainer from './ProfileContainer';
 
 const Li = styled(Link)`
     color: #0a014f;
-    font-weight: 600;
-    font-size: 0.9rem;
-    display: inline-flex;
+    display: flex;
     align-items: center;
     justify-content: center;
+    font-family: 'Galada', cursive;
     text-decoration: none;
     transition: background-color 0.8s ease-out;
-    padding: 0.5rem;
     border-radius: 1rem;
-    height: 15px;
+    height: 30px;
 
     &:hover {
         background-color: rgba(250, 232, 235, 0.7);
     }
 
+    & > svg {
+        align-items: center;
+    }
+
     @media ${device.tablet} {
-        width: 70%;
+        width: 50%;
+        padding: 0.5rem;
         font-size: 1.3rem;
         border-radius: 2rem;
-        display: block;
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: center;
         position: absolute;
         left: 50%;
         transform: translateX(-50%);
-        height: 25px;
-        padding: 0.8rem 0;
 
         &:first-of-type {
             margin-top: 45%;
@@ -88,7 +92,7 @@ function Navigation(props) {
             {handleNav ? (
                 <Fragment>
                     <Li
-                        to={`/questions`}
+                        to={`/create`}
                         onClick={() => {
                             handleNav(false);
                         }}
@@ -126,7 +130,7 @@ function Navigation(props) {
                 </Fragment>
             ) : (
                 <Fragment>
-                    <Li to={`/questions`}>New Poll</Li>
+                    <Li to={`/create`}>New Poll</Li>
                     <Li to={`/leaderboard`}>Leader Board</Li>
 
                     {users[authTokens] ? (

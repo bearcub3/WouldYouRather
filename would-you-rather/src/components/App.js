@@ -12,6 +12,7 @@ import Header from './Header';
 import Temp from './Temp';
 import Home from './Home';
 import Login from './Login';
+import PollView from './PollView';
 import NotFound from '../pages/404';
 
 function App(props) {
@@ -54,11 +55,23 @@ function App(props) {
                         {/* // TODO: if user hasn't been logged in let them know to
                         log in first before use the app */}
                         <PrivateRoute path="/" exact component={Home} />
-                        <PrivateRoute path="/questions" component={Temp} />
+                        <PrivateRoute path="/create" component={Temp} />
                         <Route path="/login" component={Login} />
+                        <Route path="/:id" component={PollView} />
                         <Route component={NotFound} />
                     </Switch>
                 </main>
+                <footer
+                    style={{
+                        width: `100%`,
+                        height: `180px`,
+                        backgroundColor: `#E4C2C6`,
+                        position: `relative`,
+                        bottom: `0`,
+                        marginTop: `40px`,
+                        zIndex: `0`,
+                    }}
+                ></footer>
             </div>
         </AuthContext.Provider>
     );

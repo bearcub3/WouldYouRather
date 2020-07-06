@@ -14,6 +14,8 @@ const TabContainer = styled.div`
     border-top-left-radius: 10px;
     border-top-right-radius: 10px;
     cursor: pointer;
+    font-family: 'Galada', cursive;
+    font-size: clamp(1rem, 2vw, 1.3rem);
     background-color: ${(props) => props.bgColor};
     color: ${(props) => props.color};
     transition: color 0.3s ease-out, background-color 0.2s ease-in-out;
@@ -23,26 +25,16 @@ const TabContainer = styled.div`
         width: 18px;
         height: 3px;
         position: absolute;
-        top: 47px;
+        top: 57px;
         left: 49.2%;
         background-color: #0a014f;
-    }
 
-    @media ${device.laptop} {
-        &:first-of-type::after {
-            left: 48.8%;
+        @media ${device.laptop} {
+            left: 48.6%;
         }
-    }
 
-    @media ${device.tablet} {
-        &:first-of-type::after {
-            left: 48.1%;
-        }
-    }
-
-    @media ${device.mobileS} {
-        &:first-of-type::after {
-            left: 47.8%;
+        @media ${device.tablet} {
+            left: 47.2%;
         }
     }
 `;
@@ -54,7 +46,7 @@ const TabWrapper = styled.div`
     margin: 2rem 2rem 0 2rem;
     grid-gap: 14px;
     width: 80%;
-    height: 50px;
+    height: 60px;
     box-sizing: border-box;
 `;
 

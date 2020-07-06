@@ -8,9 +8,10 @@ import Navigation from './Navigation';
 import Hamburger from './Hamburger';
 
 const H1 = styled.h1`
-    font-size: 1.3rem;
-    letter-spacing: -0.03rem;
+    font-family: 'Galada', cursive;
+    font-size: 1.4rem;
     color: #0a014f;
+    font-weight: 500;
 `;
 
 const HeaderWrapper = styled.header`
@@ -33,13 +34,12 @@ function Header() {
     const { ref } = useResizeObserver({
         onResize: ({ width }) => {
             // TODO: this is arbitrary number
-            width <= 600 ? setDevice(true) : setDevice(false);
+            width <= 700 ? setDevice(true) : setDevice(false);
         },
     });
     return (
         <HeaderWrapper ref={ref}>
             <H1>Would You Rather?</H1>
-
             {isMobile ? <Hamburger /> : <Navigation />}
         </HeaderWrapper>
     );

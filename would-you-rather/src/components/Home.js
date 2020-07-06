@@ -3,6 +3,9 @@ import propTypes from 'prop-types';
 import styled from 'styled-components';
 import { connect } from 'react-redux';
 import { TabContext } from '../context/tabs';
+
+import { device } from '../utils/device-unit';
+
 import Tabs from './Tabs';
 import PollContainer from './PollContainer';
 
@@ -16,6 +19,17 @@ const Container = styled.div`
     width: 80%;
     border: 3px solid #0a014f;
     border-top: none;
+    padding-bottom: 2rem;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+
+    @media ${device.laptop} {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    @media ${device.tablet} {
+        grid-template-columns: 100%;
+    }
 `;
 
 function Home(props) {

@@ -10,7 +10,7 @@ const ProfileAvatar = styled.div`
     height: ${(props) => `${props.size}px`};
     border-radius: ${(props) => `${props.size}px`};
     display: inline-block;
-    border: 3px solid #cd9fcc;
+    border: 3px solid #0a014f;
     margin: 0 1rem;
     cursor: pointer;
 `;

@@ -13,6 +13,7 @@ const LoginContainer = styled.div`
     justify-content: center;
     border-radius: 0.8rem;
     border: 4px solid #0a014f;
+    z-index: 10;
 
     @media ${device.tablet} {
         width: 80%;
@@ -42,7 +43,16 @@ function Login(props) {
                     margin: `1rem 2rem`,
                 }}
             >
-                <h3 style={{ color: `#0a014f` }}>Log In</h3>
+                <h3
+                    style={{
+                        color: `#0a014f`,
+                        fontFamily: `Galada, cursive`,
+                        fontWeight: `normal`,
+                        fontSize: `1.2rem`,
+                    }}
+                >
+                    Log In
+                </h3>
                 <p style={{ fontSize: `1rem`, color: `#c1c1c1` }}>
                     Please Log in to continue
                 </p>

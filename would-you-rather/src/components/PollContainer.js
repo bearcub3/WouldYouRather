@@ -1,4 +1,4 @@
-import React, { Fragment } from 'react';
+import React, { Fragment, useMemo } from 'react';
 import propTypes from 'prop-types';
 import { connect } from 'react-redux';
 import styled from 'styled-components';
@@ -17,19 +17,15 @@ function PollContainer(props) {
     const { activeTab } = useTabs();
     const { category } = props;
 
-    console.log(category);
+    const updatedPoll = useMemo(() => <Poll category={category} />, [category]);
 
     return (
         <Fragment>
             {category.answered && (
-                <TabContainer0 active={activeTab}>
-                    <Poll category={category} />
-                </TabContainer0>
+                <TabContainer0 active={activeTab}>{updatedPoll}</TabContainer0>
             )}
             {!category.answered && (
-                <TabContainer1 active={activeTab}>
-                    <Poll category={category} />
-                </TabContainer1>
+                <TabContainer1 active={activeTab}>{updatedPoll}</TabContainer1>
             )}
         </Fragment>
     );
