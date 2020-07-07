@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import styled from 'styled-components';
 
 import { useTabs } from '../context/tabs';
+import { formatDate } from '../utils/helper';
 import Poll from './Poll';
 
 const TabContainer0 = styled.div`
@@ -37,7 +38,7 @@ function mapStateToProps({ polls, users, authedUser }, { id }) {
     return {
         category: {
             id,
-            timestamp,
+            timestamp: formatDate(timestamp),
             creator: users[creator].name,
             avatar: users[creator].avatarURL,
             questions_0,

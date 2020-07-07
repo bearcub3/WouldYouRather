@@ -19,7 +19,7 @@ const Container = styled.div`
     width: 80%;
     border: 3px solid #0a014f;
     border-top: none;
-    padding-bottom: 2rem;
+    padding-top: 2rem;
     display: grid;
     grid-template-columns: repeat(3, 1fr);
 

@@ -70,7 +70,7 @@ let polls = {
             question: 'Would you rather be a full stack developer',
             votes: [],
         },
-        timestamp: 1593108626,
+        timestamp: 1593851945000,
     },
     sxwoy62xhg84mvcb5jo8x: {
         id: 'sxwoy62xhg84mvcb5jo8x',
@@ -83,7 +83,7 @@ let polls = {
             question: 'Would you rather go for swimming',
             votes: ['louise_brodeur', 'idris_elba'],
         },
-        timestamp: 1593081986,
+        timestamp: 1593879995000,
     },
     daxuh2znt8vquvacvhh2s: {
         id: 'daxuh2znt8vquvacvhh2s',
@@ -96,7 +96,7 @@ let polls = {
             question: 'Would you rather be a cat person',
             votes: ['henry_james', 'louise_brodeur', 'idris_elba'],
         },
-        timestamp: 1593310226,
+        timestamp: 1593945650000,
     },
     p3ybk5ed2hkc70l00549: {
         id: 'p3ybk5ed2hkc70l00549',
@@ -113,7 +113,7 @@ let polls = {
             question: 'Would you rather be a atheist',
             votes: ['idris_elba'],
         },
-        timestamp: 1593545186,
+        timestamp: 1594019530000,
     },
     ksnyqn1anhevvftlk7rwi: {
         id: 'ksnyqn1anhevvftlk7rwi',
@@ -126,7 +126,7 @@ let polls = {
             question: 'Would you rather eat a live octopus',
             votes: ['amanda_seyfried', 'idris_elba'],
         },
-        timestamp: 1593617186,
+        timestamp: 1594047097000,
     },
     h5l2u84zun1lzkkbchgwx: {
         id: 'h5l2u84zun1lzkkbchgwx',
@@ -139,7 +139,7 @@ let polls = {
             question: 'Would you rather skip dinner',
             votes: ['amanda_seyfried'],
         },
-        timestamp: 1593617459,
+        timestamp: 1594103352000,
     },
     vv8do8ddnibhsscmgi4ys: {
         id: 'vv8do8ddnibhsscmgi4ys',
@@ -152,7 +152,7 @@ let polls = {
             question: 'Would you rather a hero',
             votes: ['amanda_seyfried', 'idris_elba'],
         },
-        timestamp: 1593518400,
+        timestamp: 1594156314000,
     },
 };
 

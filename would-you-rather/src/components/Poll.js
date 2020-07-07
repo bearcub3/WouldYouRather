@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Fragment } from 'react';
 import propTypes from 'prop-types';
 import styled from 'styled-components';
 import { connect } from 'react-redux';
@@ -9,7 +9,7 @@ import Avatar from './Avatar';
 
 const Container = styled.div`
     border-radius: 10px;
-    margin: 2rem auto 0;
+    margin: 0 auto 2rem auto;
     width: 90%;
     background-color: #fae8eb;
     color: #0a014f;
@@ -67,36 +67,58 @@ const Button = styled(Link)`
     }
 `;
 
+const Time = styled.p`
+    grid-column: 1 / span 2;
+    width: 100%;
+    height: 25px;
+    font-size: 0.8rem;
+    margin: 0 auto;
+    line-height: 1.5;
+    color: #400abd;
+    padding: 0 2.5rem;
+    box-sizing: border-box;
+`;
+
 function Poll(props) {
-    const { avatar, creator, questions_0, answered, id } = props.category;
+    const {
+        avatar,
+        creator,
+        questions_0,
+        answered,
+        id,
+        timestamp,
+    } = props.category;
     const { category } = props;
     const mainQuestion = questions_0['question'];
+
     return (
-        <Container>
-            <PollCreatorName>
-                {creator}{' '}
-                <span
-                    style={{
-                        fontWeight: `400`,
-                        fontSize: `1rem`,
-                        fontFamily: `Open Sans`,
+        <Fragment>
+            <Time>{timestamp}</Time>
+            <Container>
+                <PollCreatorName>
+                    {creator}{' '}
+                    <span
+                        style={{
+                            fontWeight: `400`,
+                            fontSize: `1rem`,
+                            fontFamily: `Open Sans`,
+                        }}
+                    >
+                        asks
+                    </span>
+                </PollCreatorName>
+                <Avatar img={avatar} size={65} />
+                <Question>{mainQuestion}?</Question>
+                <Button
+                    to={{
+                        pathname: `/questions/${id}`,
+                        state: { category },
                     }}
                 >
-                    asks
-                </span>
-            </PollCreatorName>
-            <Avatar img={avatar} size={65} />
-            <Question>{mainQuestion}?</Question>
-
-            <Button
-                to={{
-                    pathname: `/questions/${id}`,
-                    state: { category },
-                }}
-            >
-                {answered ? 'View Result' : 'Join Vote'}
-            </Button>
-        </Container>
+                    {answered ? 'View Result' : 'Join Vote'}
+                </Button>
+            </Container>
+        </Fragment>
     );
 }
 
