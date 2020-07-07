@@ -15,6 +15,7 @@ export default function polls(state = {}, action) {
                 [answer.id]: {
                     ...state[answer.id],
                     [answer.userChoice]: {
+                        question: state[answer.id][answer.userChoice].question,
                         votes: state[answer.id][
                             answer.userChoice
                         ].votes.concat([answer.authedUser]),

@@ -68,16 +68,25 @@ function FormToVote(props) {
             <ul style={{ padding: `1rem` }}>
                 {questionsLength.map((item, idx) => (
                     <Li key={item}>
-                        <Input
-                            type="radio"
-                            id={item}
-                            name="question"
-                            value={item}
-                            onClick={(e) => setChoice(e.target.value)}
-                        />
-                        <label htmlFor={item} style={{ cursor: `pointer` }}>
-                            {poll[item] && poll[item].question}?
-                        </label>
+                        {poll[item] && poll[item].question.length > 0 ? (
+                            <>
+                                <Input
+                                    type="radio"
+                                    id={item}
+                                    name="question"
+                                    value={item}
+                                    onClick={(e) => setChoice(e.target.value)}
+                                />
+                                <label
+                                    htmlFor={item}
+                                    style={{ cursor: `pointer` }}
+                                >
+                                    {poll[item].question}
+                                </label>
+                            </>
+                        ) : (
+                            ''
+                        )}
                     </Li>
                 ))}
             </ul>

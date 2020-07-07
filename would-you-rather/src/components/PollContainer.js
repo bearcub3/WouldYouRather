@@ -2,6 +2,7 @@ import React, { Fragment, useMemo } from 'react';
 import propTypes from 'prop-types';
 import { connect } from 'react-redux';
 import styled from 'styled-components';
+
 import { useTabs } from '../context/tabs';
 import Poll from './Poll';
 
@@ -21,10 +22,9 @@ function PollContainer(props) {
 
     return (
         <Fragment>
-            {category.answered && (
+            {category.answered ? (
                 <TabContainer0 active={activeTab}>{updatedPoll}</TabContainer0>
-            )}
-            {!category.answered && (
+            ) : (
                 <TabContainer1 active={activeTab}>{updatedPoll}</TabContainer1>
             )}
         </Fragment>

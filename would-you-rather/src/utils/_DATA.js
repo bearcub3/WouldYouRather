@@ -231,6 +231,7 @@ export function _savePollAnswer(answer) {
                 [answer.id]: {
                     ...polls[answer.id],
                     [answer.userChoice]: {
+                        question: polls[answer.id][answer.userChoice].question,
                         votes: polls[answer.id][
                             answer.userChoice
                         ].votes.concat([answer.authedUser]),

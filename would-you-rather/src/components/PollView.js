@@ -7,6 +7,7 @@ import { Redirect } from 'react-router-dom';
 
 import Avatar from './Avatar';
 import FormToVote from './FormToVote';
+import PollResult from './PollResult';
 
 const Container = styled.div`
     border-radius: 10px;
@@ -33,8 +34,6 @@ const PollCreatorName = styled.div`
 `;
 
 function PollView(props) {
-    console.log('PollView', props);
-
     const { creator, avatar, answered } = props.location.state.category;
 
     const [toHome, setHome] = useState(false);
@@ -70,7 +69,10 @@ function PollView(props) {
             </PollCreatorName>
             {isMobile ? null : <Avatar img={avatar} size={140} />}
             {answered ? (
-                <div>tomorrow</div>
+                <PollResult
+                    poll={props.location.state.category}
+                    isMobile={isMobile}
+                />
             ) : (
                 <FormToVote
                     handleToHome={handleToHome}
