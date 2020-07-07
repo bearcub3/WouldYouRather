@@ -9,6 +9,7 @@ export default function polls(state = {}, action) {
             };
         case SUBMIT_POLL_ANSWER:
             const { answer } = action;
+
             return {
                 ...state,
                 [answer.id]: {

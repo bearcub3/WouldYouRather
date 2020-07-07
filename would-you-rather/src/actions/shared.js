@@ -31,12 +31,14 @@ export function handleAuthentication(id) {
 export function handleSendPollAnswer(id, userChoice) {
     return (dispatch, getState) => {
         const { authedUser } = getState();
+        const userAnswer = { id, authedUser, userChoice };
 
         dispatch(showLoading());
-        dispatch(sendPollAnswer({ id, authedUser, userChoice }));
-        dispatch(submitUserAnswer({ id, authedUser, userChoice }));
+        dispatch(sendPollAnswer(userAnswer));
+        dispatch(submitUserAnswer(userAnswer));
         dispatch(hideLoading());
-        return savePollAnswer({ id, authedUser, userChoice }).catch((e) => {
+
+        return savePollAnswer(userAnswer).catch((e) => {
             console.warn('Error in handleSendPollAnswer: ', e);
             alert('There was an error. Try again.');
         });

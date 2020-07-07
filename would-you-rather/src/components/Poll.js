@@ -87,7 +87,13 @@ function Poll(props) {
             </PollCreatorName>
             <Avatar img={avatar} size={65} />
             <Question>{mainQuestion}?</Question>
-            <Button to={{ pathname: `/${id}`, state: { category } }}>
+
+            <Button
+                to={{
+                    pathname: `/questions/${id}`,
+                    state: { category },
+                }}
+            >
                 {answered ? 'View Result' : 'Join Vote'}
             </Button>
         </Container>

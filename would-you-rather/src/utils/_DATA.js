@@ -222,26 +222,28 @@ export function _savePoll(question) {
     });
 }
 
-export function _savePollAnswer({ id, authedUser, userChoice }) {
+export function _savePollAnswer(answer) {
+    console.log('_savePollAnswer', answer);
     return new Promise((res, rej) => {
         setTimeout(() => {
             polls = {
                 ...polls,
-                [id]: {
-                    ...polls[id],
-                    [userChoice]: {
-                        votes: polls[id][userChoice].votes.concat([authedUser]),
+                [answer.id]: {
+                    ...polls[answer.id],
+                    [answer.userChoice]: {
+                        votes: polls[answer.id][
+                            answer.userChoice
+                        ].votes.concat([answer.authedUser]),
                     },
                 },
             };
-
             users = {
                 ...users,
-                [authedUser]: {
-                    ...users[authedUser],
+                [answer.authedUser]: {
+                    ...users[answer.authedUser],
                     answered: {
-                        ...users[authedUser].answered,
-                        [id]: userChoice,
+                        ...users[answer.authedUser].answered,
+                        [answer.id]: answer.userChoice,
                     },
                 },
             };

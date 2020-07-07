@@ -39,3 +39,5 @@ If I don't want to re-render the components when the store updated, pass `null` 
 2. create an action creator ( create a constant for action type as well )
 3. create a reducer to make a state change accordingly
 4. to deal with backend data, create an asynchronous promise
+
+`It is mind-blowing that sometimes I have to figure out what the problem is and why every browser works slightly differently even with the same JavaScript codes. It seems like it would be better to work on firefox and if the app works fine there, it would be pretty much the same on Chrome`

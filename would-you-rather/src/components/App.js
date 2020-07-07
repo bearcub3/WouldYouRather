@@ -57,7 +57,7 @@ function App(props) {
                         <PrivateRoute path="/" exact component={Home} />
                         <PrivateRoute path="/create" component={Temp} />
                         <Route path="/login" component={Login} />
-                        <Route path="/:id" component={PollView} />
+                        <Route path="/questions/:id" component={PollView} />
                         <Route component={NotFound} />
                     </Switch>
                 </main>
