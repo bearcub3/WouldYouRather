@@ -1,6 +1,8 @@
-import React, { useState, Fragment } from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 import Navigation from './Navigation';
+
+import { useHamburger } from '../context/hamburger';
 
 const Ham = styled.div`
     position: relative;
@@ -89,9 +91,10 @@ const Element = styled.div`
 `;
 
 function Hamburger() {
-    const [isActive, setActive] = useState(false);
+    const { isActive, setActive } = useHamburger();
+
     return (
-        <Fragment>
+        <>
             <Ham
                 className={isActive ? 'isActive' : ''}
                 onClick={() => setActive(!isActive)}
@@ -100,8 +103,8 @@ function Hamburger() {
                     <Element></Element>
                 </Wrapper>
             </Ham>
-            {isActive ? <Navigation handleNav={setActive} /> : ''}
-        </Fragment>
+            {isActive ? <Navigation /> : ''}
+        </>
     );
 }
 

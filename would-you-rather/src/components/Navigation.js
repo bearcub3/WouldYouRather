@@ -4,7 +4,9 @@ import { connect } from 'react-redux';
 import { Link, withRouter } from 'react-router-dom';
 
 import { device } from '../utils/device-unit';
+
 import { useAuth } from '../context/auth';
+import { useHamburger } from '../context/hamburger';
 import { FiLogIn } from 'react-icons/fi';
 
 import ProfileContainer from './ProfileContainer';
@@ -84,76 +86,42 @@ const Nav = styled.nav`
 `;
 
 function Navigation(props) {
+    const { users } = props;
     const { authTokens } = useAuth();
-    const { users, handleNav } = props;
+    const { setActive } = useHamburger();
 
     return (
         <Nav>
-            {handleNav ? (
+            <Li
+                to={`/add`}
+                onClick={() => {
+                    setActive(false);
+                }}
+            >
+                New Poll
+            </Li>
+            <Li to="/leaderboard" onClick={() => setActive(false)}>
+                Leader Board
+            </Li>
+            {users[authTokens] ? (
                 <Fragment>
-                    <Li
-                        to={`/create`}
-                        onClick={() => {
-                            handleNav(false);
-                        }}
-                    >
-                        New Poll
-                    </Li>
-                    <Li to="/leaderboard" onClick={() => handleNav(false)}>
-                        Leader Board
-                    </Li>
-                    {users[authTokens] ? (
-                        <Fragment>
-                            <ProfileContainer
-                                userAvatar={users[authTokens].avatarURL}
-                                userName={users[authTokens].name}
-                                handleNav={handleNav}
-                            />
-                        </Fragment>
-                    ) : (
-                        <Li
-                            to="/login"
-                            onClick={() => handleNav(false)}
-                            position={69}
-                        >
-                            <FiLogIn />
-                            <span
-                                style={{
-                                    display: `inline-block`,
-                                    paddingLeft: `10px`,
-                                }}
-                            >
-                                Log In
-                            </span>
-                        </Li>
-                    )}
+                    <ProfileContainer
+                        userAvatar={users[authTokens].avatarURL}
+                        userName={users[authTokens].name}
+                    />
                 </Fragment>
             ) : (
-                <Fragment>
-                    <Li to={`/create`}>New Poll</Li>
-                    <Li to={`/leaderboard`}>Leader Board</Li>
-
-                    {users[authTokens] ? (
-                        <Fragment>
-                            <ProfileContainer
-                                userAvatar={users[authTokens].avatarURL}
-                                userName={users[authTokens].name}
-                            />
-                        </Fragment>
-                    ) : (
-                        <Li to="/login" position={69}>
-                            <FiLogIn />
-                            <span
-                                style={{
-                                    display: `inline-block`,
-                                    paddingLeft: `10px`,
-                                }}
-                            >
-                                Log In
-                            </span>
-                        </Li>
-                    )}
-                </Fragment>
+                <Li to="/login" onClick={() => setActive(false)} position={69}>
+                    <FiLogIn />
+                    <span
+                        style={{
+                            display: `inline-block`,
+                            paddingLeft: `10px`,
+                        }}
+                    >
+                        Log In
+                    </span>
+                </Li>
             )}
         </Nav>
     );
