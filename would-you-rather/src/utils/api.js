@@ -17,7 +17,7 @@ export function savePollAnswer(info) {
     return _savePollAnswer(info);
 }
 
-export function savePollQuestion(info) {
+export function savePollData(info) {
     return _savePoll(info);
 }
 

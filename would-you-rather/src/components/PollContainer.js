@@ -35,6 +35,7 @@ function PollContainer(props) {
 function mapStateToProps({ polls, users, authedUser }, { id }) {
     const poll = polls[id];
     const { creator, timestamp, questions_0, questions_1, questions_2 } = poll;
+
     return {
         category: {
             id,

@@ -1,4 +1,8 @@
-import { RECEIVE_USERS, SUBMIT_USER_ANSWER } from '../actions/users';
+import {
+    RECEIVE_USERS,
+    SUBMIT_USER_ANSWER,
+    SUBMIT_USER_POLL,
+} from '../actions/users';
 
 export default function users(state = {}, action) {
     switch (action.type) {
@@ -17,6 +21,16 @@ export default function users(state = {}, action) {
                         ...state[answer.authedUser].answered,
                         [answer.id]: answer.userChoice,
                     },
+                },
+            };
+        case SUBMIT_USER_POLL:
+            const { poll } = action;
+
+            return {
+                ...state,
+                [poll.creator]: {
+                    ...state[poll.creator],
+                    questions: state[poll.creator].questions.concat([poll.id]),
                 },
             };
         default:

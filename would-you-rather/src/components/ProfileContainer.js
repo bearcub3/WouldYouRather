@@ -4,6 +4,8 @@ import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 
 import { useAuth } from '../context/auth';
+import { useHamburger } from '../context/hamburger';
+import { useResize } from '../context/resize';
 import { FiUser, FiLogOut } from 'react-icons/fi';
 import { device } from '../utils/device-unit';
 
@@ -66,17 +68,25 @@ const LinkEl = styled(Link)`
 
 function ProfileContainer(props) {
     const { setAuthTokens } = useAuth();
-    const { userAvatar, userName, handleNav } = props;
+    const { setActive } = useHamburger();
+    const { isMobile } = useResize();
+    const { userAvatar, userName } = props;
     const [isClicked, setClicked] = useState(false);
     const [isLoggedOut, setLoggedOut] = useState(false);
+
     return (
         <AvatarContainer onClick={() => setClicked(!isClicked)}>
             <Avatar img={userAvatar} size={40} />
             <User>{userName}</User>
             {isClicked && (
                 <LogoutToolTip>
-                    {/* // TODO: fix */}
-                    <LinkEl to="/">
+                    <LinkEl
+                        to="/"
+                        onClick={() => {
+                            setClicked(!isClicked);
+                            isMobile && setActive(false);
+                        }}
+                    >
                         <FiUser size="1.2rem" />
                         <span
                             style={{
@@ -93,7 +103,7 @@ function ProfileContainer(props) {
                             setLoggedOut(!isLoggedOut);
                             setTimeout(() => {
                                 setClicked(!isClicked);
-                                handleNav && handleNav(false);
+                                isMobile && setActive(false);
                             }, 300);
                         }}
                         to="/login"

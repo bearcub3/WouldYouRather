@@ -9,10 +9,10 @@ import { AuthContext } from '../context/auth';
 import PrivateRoute from '../PrivateRoute';
 
 import Header from './Header';
-import Temp from './Temp';
-import Home from './Home';
+import Home from '../pages/Home';
 import Login from './Login';
 import PollView from './PollView';
+import CreatePoll from '../pages/CreatePoll';
 import NotFound from '../pages/404';
 
 function App(props) {
@@ -55,7 +55,7 @@ function App(props) {
                         {/* // TODO: if user hasn't been logged in let them know to
                         log in first before use the app */}
                         <PrivateRoute path="/" exact component={Home} />
-                        <PrivateRoute path="/create" component={Temp} />
+                        <PrivateRoute path="/add" component={CreatePoll} />
                         <Route path="/login" component={Login} />
                         <Route path="/questions/:id" component={PollView} />
                         <Route component={NotFound} />

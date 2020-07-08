@@ -91,7 +91,7 @@ function PollResult(props) {
         <div style={isMobile ? { gridColumn: `1 / span 2` } : {}}>
             <h3>Result : </h3>
             {questions.map((question, idx) =>
-                question[1] !== undefined ? (
+                question[1].question !== undefined ? (
                     <Fragment key={question[0]}>
                         {userVote[idx] ? (
                             <Badge>

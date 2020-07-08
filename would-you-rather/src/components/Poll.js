@@ -89,6 +89,7 @@ function Poll(props) {
         timestamp,
     } = props.category;
     const { category } = props;
+
     const mainQuestion = questions_0['question'];
 
     return (

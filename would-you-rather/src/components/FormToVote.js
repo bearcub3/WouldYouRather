@@ -53,6 +53,7 @@ function FormToVote(props) {
     const handleSubmitAnswer = (e) => {
         e.preventDefault();
         dispatch(handleSendPollAnswer(poll.id, userChoice));
+        console.log(poll.id, userChoice);
         handleToHome(true);
     };
 
@@ -68,7 +69,7 @@ function FormToVote(props) {
             <ul style={{ padding: `1rem` }}>
                 {questionsLength.map((item, idx) => (
                     <Li key={item}>
-                        {poll[item] && poll[item].question.length > 0 ? (
+                        {poll[item] && poll[item].question !== undefined ? (
                             <>
                                 <Input
                                     type="radio"

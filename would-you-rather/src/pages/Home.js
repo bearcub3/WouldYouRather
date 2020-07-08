@@ -2,12 +2,13 @@ import React, { useState } from 'react';
 import propTypes from 'prop-types';
 import styled from 'styled-components';
 import { connect } from 'react-redux';
-import { TabContext } from '../context/tabs';
+import debounceRender from 'react-debounce-render';
 
+import { TabContext } from '../context/tabs';
 import { device } from '../utils/device-unit';
 
-import Tabs from './Tabs';
-import PollContainer from './PollContainer';
+import Tabs from '../components/Tabs';
+import PollContainer from '../components/PollContainer';
 
 const TabsContent = [
     { label: 'Unanswered Polls', value: 0 },
@@ -68,4 +69,6 @@ Home.propTypes = {
     questions: propTypes.array.isRequired,
 };
 
-export default connect(mapStateToProps)(Home);
+const debouncedHome = debounceRender(Home, 200);
+
+export default connect(mapStateToProps)(debouncedHome);

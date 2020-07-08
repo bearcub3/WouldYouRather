@@ -15,3 +15,10 @@ export function sendPollAnswer(answer) {
         answer,
     };
 }
+
+export function savePoll(poll) {
+    return {
+        type: SAVE_POLL_QUESTIONS,
+        poll,
+    };
+}

@@ -175,55 +175,56 @@ function generateUID() {
     );
 }
 
-function formatQuestion({ creator, ...questions }) {
-    const [question_0, question_1, question_2 = null] = questions;
+function formatQuestion(newPoll) {
+    const { q0, q1, q2, authedUser } = newPoll;
 
     return {
         id: generateUID(),
-        creator,
-        question_0: {
-            question: question_0,
+        creator: authedUser,
+        questions_0: {
+            question: 'Would you rather ' + q0,
             votes: [],
         },
-        question_1: {
-            question: question_1,
+        questions_1: {
+            question: 'Would you rather ' + q1,
             votes: [],
         },
-        question_2: {
-            question: question_2,
+        questions_2: {
+            question: q2 === '' ? undefined : 'Would you rather ' + q2,
             votes: [],
         },
         timestamp: Date.now(),
     };
 }
 
-export function _savePoll(question) {
+export function _savePoll(poll) {
     return new Promise((res, rej) => {
-        const authedUser = question.creator;
-        const formattedQuestion = formatQuestion(question);
+        const formattedQuestion = formatQuestion(poll);
+
+        const { creator } = formattedQuestion;
 
         setTimeout(() => {
+            polls = {
+                ...polls,
+                [formattedQuestion.id]: formattedQuestion,
+            };
+
             users = {
                 ...users,
-                [authedUser]: {
-                    ...users[authedUser],
-                    questions: users[authedUser].questions.concat([
+                [creator]: {
+                    ...users[creator],
+                    questions: users[creator].questions.concat([
                         formattedQuestion.id,
                     ]),
                 },
             };
-            polls = {
-                ...polls,
-                [formatQuestion.id]: formattedQuestion,
-            };
 
-            res(formatQuestion);
+            res(formattedQuestion);
         }, 1000);
     });
 }
 
 export function _savePollAnswer(answer) {
-    console.log('_savePollAnswer', answer);
     return new Promise((res, rej) => {
         setTimeout(() => {
             polls = {
