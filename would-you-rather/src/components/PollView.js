@@ -37,6 +37,7 @@ function PollView(props) {
     const { creator, avatar, answered } = props.location.state.category;
 
     const [toHome, setHome] = useState(false);
+    //TODO: useResize
     const [isMobile, setDevice] = useState(false);
 
     const { ref } = useResizeObserver({

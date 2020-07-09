@@ -10,7 +10,7 @@ import Avatar from './Avatar';
 const Container = styled.div`
     border-radius: 10px;
     margin: 0 auto 2rem auto;
-    width: 90%;
+    width: 85%;
     background-color: #fae8eb;
     color: #0a014f;
     display: grid;

@@ -30,7 +30,7 @@ const Li = styled(Link)`
         align-items: center;
     }
 
-    @media ${device.tablet} {
+    @media ${device.mobileM} {
         width: 50%;
         padding: 0.5rem;
         font-size: 1.3rem;
@@ -64,7 +64,7 @@ const Nav = styled.nav`
     align-items: center;
     grid-column: 3/4;
 
-    @media ${device.tablet} {
+    @media ${device.mobileM} {
         position: absolute;
         top: 0;
         left: 0;
@@ -78,7 +78,7 @@ const Nav = styled.nav`
     }
 
     & > div:last-child {
-        @media ${device.tablet} {
+        @media ${device.mobileM} {
             margin-top: 69%;
             margin-left: -3%;
         }
