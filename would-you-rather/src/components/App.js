@@ -45,7 +45,7 @@ function App(props) {
     const { ref } = useResizeObserver({
         onResize: ({ width }) => {
             // TODO: this is arbitrary number
-            width <= 450 ? setDevice(true) : setDevice(false);
+            width <= 770 ? setDevice(true) : setDevice(false);
         },
     });
 
@@ -86,7 +86,7 @@ function App(props) {
                     <footer
                         style={{
                             width: `100%`,
-                            height: `180px`,
+                            height: `130px`,
                             backgroundColor: `#E4C2C6`,
                             position: `relative`,
                             bottom: `0`,

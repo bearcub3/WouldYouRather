@@ -1,11 +1,12 @@
-import React, { useState } from 'react';
+import React from 'react';
 import styled from 'styled-components';
 import Navigation from './Navigation';
 
 import { useHamburger } from '../context/hamburger';
 
 const Ham = styled.div`
-    position: relative;
+    position: fixed;
+    right: 2rem;
     grid-column: 3/4;
     display: flex;
     width: max-content;

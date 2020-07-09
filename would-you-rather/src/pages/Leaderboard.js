@@ -38,12 +38,6 @@ const Participant = styled.div`
     grid-template-rows: 40% auto auto;
 
     @media ${device.tablet} {
-        width: 100%;
-        grid-template-columns: 35% 45% auto;
-        grid-template-rows: 40% auto auto;
-    }
-
-    @media ${device.mobileM} {
         width: 90%;
         grid-template-columns: 65% auto;
         grid-template-rows: 40% auto auto;
@@ -57,7 +51,7 @@ const Name = styled.p`
     grid-row: 1 / 2;
     margin-top: 0;
 
-    @media ${device.mobileM} {
+    @media ${device.tablet} {
         grid-column: 1 / 2;
         grid-row: 1 / 2;
     }
@@ -67,7 +61,7 @@ const Vote = styled.div`
     grid-column: 2 / 3;
     grid-row: 2 / 3;
 
-    @media ${device.mobileM} {
+    @media ${device.tablet} {
         font-size: 0.9rem;
         grid-column: 1 / 2;
         grid-row: 2 / 3;
@@ -78,7 +72,7 @@ const Create = styled.div`
     grid-column: 2 / 3;
     grid-row: 3 / 4;
 
-    @media ${device.mobileM} {
+    @media ${device.tablet} {
         font-size: 0.9rem;
         grid-column: 1 / 2;
         grid-row: 3 / 4;
@@ -118,7 +112,7 @@ function Leaderboard(props) {
         <Container>
             <H2>Leaderboard</H2>
             {top3.map((user, idx) => (
-                <Participant>
+                <Participant key={user.name}>
                     {isMobile ? null : (
                         <>
                             <Number

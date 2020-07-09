@@ -30,25 +30,30 @@ const Li = styled(Link)`
         align-items: center;
     }
 
-    @media ${device.mobileM} {
+    @media ${device.tablet} {
         width: 50%;
         padding: 0.5rem;
-        font-size: 1.3rem;
+        font-size: 1.5rem;
         border-radius: 2rem;
         display: flex;
         flex-direction: row;
         align-items: center;
         justify-content: center;
         position: absolute;
+        top: 30%;
         left: 50%;
         transform: translateX(-50%);
 
-        &:first-of-type {
-            margin-top: 45%;
+        &:nth-of-type(2) {
+            margin-top: 20%;
         }
 
-        &:nth-of-type(2) {
-            margin-top: 57%;
+        &:nth-of-type(3) {
+            margin-top: 40%;
+        }
+
+        &:nth-of-type(4) {
+            margin-top: 60%;
         }
 
         &:last-of-type {
@@ -59,18 +64,18 @@ const Li = styled(Link)`
 
 const Nav = styled.nav`
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(4, 1fr);
     grid-gap: 10px;
     align-items: center;
     grid-column: 3/4;
 
-    @media ${device.mobileM} {
-        position: absolute;
+    @media ${device.tablet} {
+        position: fixed;
         top: 0;
         left: 0;
         width: 100%;
         height: 100vh;
-        display: block;
+        display: flex;
         margin: 0 auto;
         z-index: 9990;
         background-color: #fff;
@@ -78,9 +83,9 @@ const Nav = styled.nav`
     }
 
     & > div:last-child {
-        @media ${device.mobileM} {
-            margin-top: 69%;
-            margin-left: -3%;
+        @media ${device.tablet} {
+            margin-top: 70%;
+            left: -15px;
         }
     }
 `;
@@ -92,6 +97,14 @@ function Navigation(props) {
 
     return (
         <Nav>
+            <Li
+                to={`/`}
+                onClick={() => {
+                    setActive(false);
+                }}
+            >
+                Home
+            </Li>
             <Li
                 to={`/add`}
                 onClick={() => {
@@ -111,7 +124,7 @@ function Navigation(props) {
                     />
                 </Fragment>
             ) : (
-                <Li to="/login" onClick={() => setActive(false)} position={69}>
+                <Li to="/login" onClick={() => setActive(false)} position={60}>
                     <FiLogIn />
                     <span
                         style={{
