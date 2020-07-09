@@ -2,6 +2,7 @@
 
 building a polling app with React and Redux
 
+
 ### start the app
 
 1. clone the app
@@ -13,6 +14,9 @@ building a polling app with React and Redux
     Make sure that the directory is `would-you-rather` one which is subdirectory of the original one.
 
 3. run `npm run start`
+
+4. or you can watch a [videoclip](https://drive.google.com/file/d/1Lz34fSGtFrAXz3kOWFta3v1atZ9LvUl8/view)!    
+
 
 #### Authentication
 
