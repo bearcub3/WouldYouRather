@@ -14,6 +14,7 @@ const Ham = styled.div`
     cursor: pointer;
     z-index: 999999;
     padding: 1rem;
+    background-color: #fff;
 
     & > div:last-of-type {
         transition-timing-function: ease-out;

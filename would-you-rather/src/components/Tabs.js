@@ -34,6 +34,10 @@ const TabContainer = styled.div`
         }
 
         @media ${device.tablet} {
+            left: 48.4%;
+        }
+
+        @media ${device.mobileM} {
             left: 47.2%;
         }
     }

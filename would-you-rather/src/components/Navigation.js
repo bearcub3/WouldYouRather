@@ -40,20 +40,20 @@ const Li = styled(Link)`
         align-items: center;
         justify-content: center;
         position: absolute;
-        top: 30%;
+        top: 20%;
         left: 50%;
         transform: translateX(-50%);
 
         &:nth-of-type(2) {
-            margin-top: 20%;
+            margin-top: 15%;
         }
 
         &:nth-of-type(3) {
-            margin-top: 40%;
+            margin-top: 30%;
         }
 
         &:nth-of-type(4) {
-            margin-top: 60%;
+            margin-top: 45%;
         }
 
         &:last-of-type {
@@ -84,7 +84,7 @@ const Nav = styled.nav`
 
     & > div:last-child {
         @media ${device.tablet} {
-            margin-top: 70%;
+            margin-top: 20%;
             left: -15px;
         }
     }
@@ -124,7 +124,7 @@ function Navigation(props) {
                     />
                 </Fragment>
             ) : (
-                <Li to="/login" onClick={() => setActive(false)} position={60}>
+                <Li to="/login" onClick={() => setActive(false)} position={45}>
                     <FiLogIn />
                     <span
                         style={{
