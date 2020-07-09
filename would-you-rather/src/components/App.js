@@ -115,7 +115,10 @@ function App(props) {
                             textAlign: `center`,
                         }}
                     >
-                        🤟 Would You Rather?
+                        <span role="img" aria-label="emoji">
+                            🤟
+                        </span>{' '}
+                        Would You Rather?
                         <br />
                         designed and built by Go-Un with React and Redux
                     </footer>
