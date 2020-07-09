@@ -107,8 +107,18 @@ function App(props) {
                             bottom: `0`,
                             marginTop: `40px`,
                             zIndex: `0`,
+                            display: `flex`,
+                            alignItems: `center`,
+                            justifyContent: `center`,
+                            color: `#fff`,
+                            fontSize: `.8rem`,
+                            textAlign: `center`,
                         }}
-                    ></footer>
+                    >
+                        🤟 Would You Rather?
+                        <br />
+                        designed and built by Go-Un with React and Redux
+                    </footer>
                 </div>
             </AuthContext.Provider>
         </ResizeContext.Provider>
