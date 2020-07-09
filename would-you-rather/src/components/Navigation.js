@@ -1,4 +1,4 @@
-import React, { Fragment } from 'react';
+import React, { Fragment, useState } from 'react';
 import styled from 'styled-components';
 import { connect } from 'react-redux';
 import { Link, withRouter } from 'react-router-dom';
@@ -84,8 +84,7 @@ const Nav = styled.nav`
 
     & > div:last-child {
         @media ${device.tablet} {
-            margin-top: 20%;
-            left: -15px;
+            margin-top: 40%;
         }
     }
 `;
@@ -94,6 +93,13 @@ function Navigation(props) {
     const { users } = props;
     const { authTokens } = useAuth();
     const { setActive } = useHamburger();
+
+    // logout dropdown
+    const [isClicked, setClicked] = useState(false);
+
+    const handleDropdown = (state) => {
+        setClicked(state);
+    };
 
     return (
         <Nav>
@@ -119,6 +125,8 @@ function Navigation(props) {
             {users[authTokens] ? (
                 <Fragment>
                     <ProfileContainer
+                        handleDropdown={handleDropdown}
+                        dropdownState={isClicked}
                         userAvatar={users[authTokens].avatarURL}
                         userName={users[authTokens].name}
                     />

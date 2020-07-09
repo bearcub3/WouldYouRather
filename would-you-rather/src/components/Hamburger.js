@@ -18,7 +18,7 @@ const Ham = styled.div`
 
     & > div:last-of-type {
         transition-timing-function: ease-out;
-        -moz-transition-duration: 50ms;
+        transition-duration: 50ms;
     }
 
     & div::before {

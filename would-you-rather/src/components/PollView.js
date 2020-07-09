@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
 import propTypes from 'prop-types';
+import { Redirect } from 'react-router-dom';
 
 import styled from 'styled-components';
-import useResizeObserver from 'use-resize-observer';
-import { Redirect } from 'react-router-dom';
+import { useResize } from '../context/resize';
 
 import Avatar from './Avatar';
 import FormToVote from './FormToVote';
@@ -35,16 +35,8 @@ const PollCreatorName = styled.div`
 
 function PollView(props) {
     const { creator, avatar, answered } = props.location.state.category;
-
+    const { isMobile } = useResize();
     const [toHome, setHome] = useState(false);
-    //TODO: useResize
-    const [isMobile, setDevice] = useState(false);
-
-    const { ref } = useResizeObserver({
-        onResize: ({ width }) => {
-            width <= 450 ? setDevice(true) : setDevice(false);
-        },
-    });
 
     const handleToHome = (param) => {
         setHome(param);
@@ -55,7 +47,7 @@ function PollView(props) {
     }
 
     return (
-        <Container ref={ref}>
+        <Container>
             <PollCreatorName>
                 {creator}{' '}
                 <span

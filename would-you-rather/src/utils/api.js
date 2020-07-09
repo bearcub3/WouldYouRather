@@ -6,9 +6,14 @@ import {
     _fakeAuthentication,
 } from './_DATA';
 
-export function getInitialData() {
-    return Promise.all([_getUsers(), _getPolls()]).then(([users, polls]) => ({
+export function getUsersData() {
+    return Promise.all([_getUsers()]).then(([users]) => ({
         users,
+    }));
+}
+
+export function getPollsData() {
+    return Promise.all([_getPolls()]).then(([polls]) => ({
         polls,
     }));
 }

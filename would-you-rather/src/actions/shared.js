@@ -1,5 +1,6 @@
 import {
-    getInitialData,
+    getUsersData,
+    getPollsData,
     getAuthentication,
     savePollAnswer,
     savePollData,
@@ -15,11 +16,20 @@ import { receivePolls, sendPollAnswer, savePoll } from '../actions/polls';
 import { setAuthedUser } from '../actions/authedUser';
 import { showLoading, hideLoading } from 'react-redux-loading-bar';
 
-export function handleInitialData() {
+export function handleUsersData() {
     return (dispatch) => {
-        return getInitialData().then(({ users, polls }) => {
+        return getUsersData().then(({ users }) => {
             dispatch(showLoading());
             dispatch(receiveUsers(users));
+            dispatch(hideLoading());
+        });
+    };
+}
+
+export function handlePollsData() {
+    return (dispatch) => {
+        return getPollsData().then(({ polls }) => {
+            dispatch(showLoading());
             dispatch(receivePolls(polls));
             dispatch(hideLoading());
         });

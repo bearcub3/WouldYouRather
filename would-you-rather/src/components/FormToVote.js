@@ -53,7 +53,6 @@ function FormToVote(props) {
     const handleSubmitAnswer = (e) => {
         e.preventDefault();
         dispatch(handleSendPollAnswer(poll.id, userChoice));
-        console.log(poll.id, userChoice);
         handleToHome(true);
     };
 

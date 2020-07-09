@@ -41,3 +41,7 @@ If I don't want to re-render the components when the store updated, pass `null` 
 4. to deal with backend data, create an asynchronous promise
 
 `It is mind-blowing that sometimes I have to figure out what the problem is and why every browser works slightly differently even with the same JavaScript codes. It seems like it would be better to work on firefox and if the app works fine there, it would be pretty much the same on Chrome`
+
+#### no-op and memory leak
+
+We create many states as we need when it comes to creating a dynamic UI component. However, once the component is unmounted, the states referring to the component still take up memory and React warns us as a memory leak. Basically, in object orient programming, it means the memory is still stored somewhere for its usage later, but, there is no way to access to the memory since the component is already unmounted. So, I had to work around to change memory allocation. What I have found so far is that I can pass function and state as props even with Route rendering the component as HOC. So, we can avoid any memory leak warning when to manage states from top hierarchy and to pass them down.

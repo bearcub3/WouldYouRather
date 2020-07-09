@@ -1,5 +1,4 @@
-import React, { useState } from 'react';
-import propTypes from 'prop-types';
+import React from 'react';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 
@@ -43,13 +42,17 @@ const LogoutToolTip = styled.div`
     box-shadow: 1px 1px 2px 1px rgba(0, 0, 0, 0.07);
     cursor: pointer;
     z-index: 99990;
+    left: 5px;
+
+    @media ${device.tablet} {
+        left: 10px;
+    }
 `;
 
 const LinkEl = styled(Link)`
     margin: 0.5rem 0 0 1.5rem;
     font-size: 0.9rem;
     font-weight: 600;
-    line-height: 1.5;
     text-align: center;
     text-decoration: none;
     color: #0a014f;
@@ -70,24 +73,23 @@ function ProfileContainer(props) {
     const { setAuthTokens } = useAuth();
     const { setActive } = useHamburger();
     const { isMobile } = useResize();
-    const { userAvatar, userName } = props;
-    const [isClicked, setClicked] = useState(false);
-    const [isLoggedOut, setLoggedOut] = useState(false);
+
+    const { userAvatar, userName, handleDropdown, dropdownState } = props;
 
     return (
-        <AvatarContainer onClick={() => setClicked(!isClicked)}>
+        <AvatarContainer onClick={() => handleDropdown(!dropdownState)}>
             <Avatar img={userAvatar} size={40} />
             <User>{userName}</User>
-            {isClicked && (
+            {dropdownState && (
                 <LogoutToolTip>
                     <LinkEl
                         to="/"
                         onClick={() => {
-                            setClicked(!isClicked);
+                            handleDropdown(!dropdownState);
                             isMobile && setActive(false);
                         }}
                     >
-                        <FiUser size="1.2rem" />
+                        <FiUser />
                         <span
                             style={{
                                 display: `inline-block`,
@@ -100,15 +102,14 @@ function ProfileContainer(props) {
                     <LinkEl
                         onClick={() => {
                             setAuthTokens('');
-                            setLoggedOut(!isLoggedOut);
                             setTimeout(() => {
-                                setClicked(!isClicked);
+                                handleDropdown(!dropdownState);
                                 isMobile && setActive(false);
                             }, 300);
                         }}
                         to="/login"
                     >
-                        <FiLogOut size="1.2rem" />
+                        <FiLogOut />
                         <span
                             style={{
                                 display: `inline-block`,
@@ -124,9 +125,9 @@ function ProfileContainer(props) {
     );
 }
 
-ProfileContainer.propTypes = {
-    userAvatar: propTypes.string,
-    userName: propTypes.string,
-};
+// ProfileContainer.propTypes = {
+//     userAvatar: propTypes.string,
+//     userName: propTypes.string,
+// };
 
 export default ProfileContainer;

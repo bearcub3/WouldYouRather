@@ -1,9 +1,11 @@
-import React, { useState } from 'react';
+import React from 'react';
 import styled from 'styled-components';
+import { connect } from 'react-redux';
+import { useAuth } from '../context/auth';
 import { IconContext } from 'react-icons';
 import { FiChevronDown, FiChevronUp } from 'react-icons/fi';
+
 import Avatar from './Avatar';
-import { useAuth } from '../context/auth';
 
 const SelectBox = styled.div`
     display: grid;
@@ -34,12 +36,11 @@ const LoginBTN = styled.button`
 `;
 
 function LoginSelectBox(props) {
-    /*  memory leak risk : https://reactjs.org/docs/hooks-effect.html */
-    const [isOpen, setOpen] = useState(false);
     const { setAuthTokens } = useAuth();
 
-    const users = [];
-    Object.entries(props.userlist).map((user) => users.push(user[1]));
+    const { dropDownState, handleDropdown } = props;
+
+    const userlist = Object.entries(props.users).map((user) => user[1]);
 
     return (
         <div
@@ -54,21 +55,23 @@ function LoginSelectBox(props) {
             }}
         >
             <IconContext.Provider value={{ color: '#CD9FCC', size: '1.3rem' }}>
-                <SelectBox onClick={() => setOpen(!isOpen)}>
+                <SelectBox onClick={() => handleDropdown(!dropDownState)}>
                     <span style={{ marginLeft: `1rem` }}>
                         which account is yours?
                     </span>
-                    {isOpen ? <FiChevronUp /> : <FiChevronDown />}
+                    {dropDownState ? <FiChevronUp /> : <FiChevronDown />}
                 </SelectBox>
             </IconContext.Provider>
-            {users.map((user) => (
-                <div key={user.id} style={isOpen ? {} : { display: `none` }}>
+            {userlist.map((user) => (
+                <div
+                    key={user.id}
+                    style={dropDownState ? {} : { display: `none` }}
+                >
                     <LoginBTN
                         onClick={() => {
                             setAuthTokens(user.id);
-                            props.handleLoginState(true);
                             setTimeout(() => {
-                                setOpen(!isOpen);
+                                handleDropdown(!dropDownState);
                             }, 300);
                         }}
                     >
@@ -81,4 +84,10 @@ function LoginSelectBox(props) {
     );
 }
 
-export default LoginSelectBox;
+function mapStateToProps({ users }) {
+    return {
+        users,
+    };
+}
+
+export default connect(mapStateToProps)(LoginSelectBox);

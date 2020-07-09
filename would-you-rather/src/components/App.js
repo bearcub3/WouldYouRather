@@ -1,12 +1,11 @@
 import React, { useEffect, useState } from 'react';
-import propTypes from 'prop-types';
 import { connect } from 'react-redux';
 import LoadingBar from 'react-redux-loading-bar';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import useResizeObserver from 'use-resize-observer';
 
 import { ResizeContext } from '../context/resize';
-import { handleInitialData, handleAuthentication } from '../actions/shared';
+import { handleUsersData, handleAuthentication } from '../actions/shared';
 import { AuthContext } from '../context/auth';
 import PrivateRoute from '../PrivateRoute';
 
@@ -21,6 +20,13 @@ import NotFound from '../pages/404';
 function App(props) {
     const { dispatch } = props;
 
+    // Login Dropdown
+    const [isOpen, setOpen] = useState(false);
+
+    const handleDropdown = (state) => {
+        setOpen(state);
+    };
+
     const regex = /[^=]*$/;
     const tokens = document.cookie.match(regex)[0];
     const [authTokens, setAuthTokens] = useState(tokens);
@@ -31,7 +37,7 @@ function App(props) {
     };
 
     useEffect(() => {
-        dispatch(handleInitialData());
+        dispatch(handleUsersData());
     }, [dispatch]);
 
     useEffect(() => {
@@ -70,16 +76,25 @@ function App(props) {
                         }}
                     >
                         <Switch>
-                            {/* // TODO: if user hasn't been logged in let them know to
-                        log in first before use the app */}
                             <PrivateRoute path="/" exact component={Home} />
                             <PrivateRoute path="/add" component={CreatePoll} />
                             <Route
                                 path="/leaderboard"
                                 component={Leaderboard}
                             />
-                            <Route path="/login" component={Login} />
-                            <Route path="/questions/:id" component={PollView} />
+                            <Route
+                                path="/login"
+                                component={() => (
+                                    <Login
+                                        handleDropdown={handleDropdown}
+                                        dropdownState={isOpen}
+                                    />
+                                )}
+                            />
+                            <PrivateRoute
+                                path="/questions/:id"
+                                component={PollView}
+                            />
                             <Route component={NotFound} />
                         </Switch>
                     </main>
@@ -99,9 +114,5 @@ function App(props) {
         </ResizeContext.Provider>
     );
 }
-
-App.propTypes = {
-    dispatch: propTypes.func,
-};
 
 export default connect()(App);

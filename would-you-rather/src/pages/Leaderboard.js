@@ -106,7 +106,6 @@ function Leaderboard(props) {
     const { isMobile } = useResize();
 
     const top3 = totalScore.slice(0, 3);
-    console.log(top3);
 
     return (
         <Container>

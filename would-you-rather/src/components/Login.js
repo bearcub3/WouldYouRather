@@ -1,10 +1,10 @@
-import React, { useState } from 'react';
+import React from 'react';
 import styled from 'styled-components';
-import { connect } from 'react-redux';
-import LoginSelectBox from './LoginSelectBox';
 import { Redirect } from 'react-router-dom';
+
 import { device } from '../utils/device-unit';
 import { useAuth } from '../context/auth';
+import LoginSelectBox from './LoginSelectBox';
 
 const LoginContainer = styled.div`
     width: 50%;
@@ -23,13 +23,8 @@ const LoginContainer = styled.div`
 
 function Login(props) {
     const { authTokens } = useAuth();
-    const [isLoggedIn, setLoggedIn] = useState(false);
 
-    const handleLoginState = (state) => {
-        setLoggedIn(state);
-    };
-
-    if (authTokens && isLoggedIn) {
+    if (authTokens) {
         return <Redirect to="/" />;
     }
 
@@ -57,20 +52,12 @@ function Login(props) {
                     Please Log in to continue
                 </p>
                 <LoginSelectBox
-                    userlist={props.users}
-                    dispatch={props.dispatch}
-                    handleLoginState={handleLoginState}
+                    handleDropdown={props.handleDropdown}
+                    dropDownState={props.dropdownState}
                 />
             </div>
         </LoginContainer>
     );
 }
 
-function mapStateToProps({ users, dispatch }) {
-    return {
-        users,
-        dispatch,
-    };
-}
-
-export default connect(mapStateToProps)(Login);
+export default Login;

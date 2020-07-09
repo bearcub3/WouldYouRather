@@ -1,9 +1,9 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import propTypes from 'prop-types';
 import styled from 'styled-components';
 import { connect } from 'react-redux';
-import debounceRender from 'react-debounce-render';
 
+import { handlePollsData } from '../actions/shared';
 import { TabContext } from '../context/tabs';
 import { device } from '../utils/device-unit';
 
@@ -34,12 +34,16 @@ const Container = styled.div`
 `;
 
 function Home(props) {
-    const { questions } = props;
+    const { questions, dispatch } = props;
     const [activeTab, setTab] = useState(0);
 
     const handleTab = (data) => {
         setTab(data);
     };
+
+    useEffect(() => {
+        dispatch(handlePollsData());
+    }, [dispatch]);
 
     return (
         <TabContext.Provider value={{ activeTab, controlTabView: handleTab }}>
@@ -69,6 +73,4 @@ Home.propTypes = {
     questions: propTypes.array.isRequired,
 };
 
-const debouncedHome = debounceRender(Home, 200);
-
-export default connect(mapStateToProps)(debouncedHome);
+export default connect(mapStateToProps)(Home);
