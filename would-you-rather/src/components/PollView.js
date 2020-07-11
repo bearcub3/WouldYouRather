@@ -1,8 +1,9 @@
-import React, { useState } from 'react';
+import React, { Fragment, useState } from 'react';
 import propTypes from 'prop-types';
-import { Redirect } from 'react-router-dom';
-
+import { withRouter, Redirect } from 'react-router-dom';
+import { connect } from 'react-redux';
 import styled from 'styled-components';
+
 import { useResize } from '../context/resize';
 
 import Avatar from './Avatar';
@@ -33,8 +34,10 @@ const PollCreatorName = styled.div`
     letter-spacing: -0.05rem;
 `;
 
-function PollView(props) {
-    const { creator, avatar, answered } = props.location.state.category;
+function PollView({ match, polls, location }) {
+    const id = match.params.id;
+    const poll = polls[id];
+
     const { isMobile } = useResize();
     const [toHome, setHome] = useState(false);
 
@@ -48,30 +51,41 @@ function PollView(props) {
 
     return (
         <Container>
-            <PollCreatorName>
-                {creator}{' '}
-                <span
-                    style={{
-                        fontWeight: `400`,
-                        fontSize: `1rem`,
-                        fontFamily: `Open Sans`,
-                    }}
-                >
-                    asks
-                </span>
-            </PollCreatorName>
-            {isMobile ? null : <Avatar img={avatar} size={140} />}
-            {answered ? (
-                <PollResult
-                    poll={props.location.state.category}
-                    isMobile={isMobile}
-                />
+            {poll === undefined ? (
+                <Redirect to="/notfound" />
             ) : (
-                <FormToVote
-                    handleToHome={handleToHome}
-                    isMobile={isMobile}
-                    poll={props.location.state.category}
-                />
+                <Fragment>
+                    <PollCreatorName>
+                        {location.state.category.creator}{' '}
+                        <span
+                            style={{
+                                fontWeight: `400`,
+                                fontSize: `1rem`,
+                                fontFamily: `Open Sans`,
+                            }}
+                        >
+                            asks
+                        </span>
+                    </PollCreatorName>
+                    {isMobile ? null : (
+                        <Avatar
+                            img={location.state.category.avatar}
+                            size={140}
+                        />
+                    )}
+                    {location.state.category.answered ? (
+                        <PollResult
+                            poll={location.state.category}
+                            isMobile={isMobile}
+                        />
+                    ) : (
+                        <FormToVote
+                            handleToHome={handleToHome}
+                            isMobile={isMobile}
+                            poll={location.state.category}
+                        />
+                    )}
+                </Fragment>
             )}
         </Container>
     );
@@ -82,4 +96,10 @@ PollView.propTypes = {
     location: propTypes.object,
 };
 
-export default PollView;
+function mapToStateToProps({ polls }) {
+    return {
+        polls,
+    };
+}
+
+export default withRouter(connect(mapToStateToProps)(PollView));

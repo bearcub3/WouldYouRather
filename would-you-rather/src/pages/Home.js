@@ -1,9 +1,6 @@
-import React, { useState, useEffect } from 'react';
-import propTypes from 'prop-types';
+import React, { useState } from 'react';
 import styled from 'styled-components';
-import { connect } from 'react-redux';
 
-import { handlePollsData } from '../actions/shared';
 import { TabContext } from '../context/tabs';
 import { device } from '../utils/device-unit';
 
@@ -34,16 +31,11 @@ const Container = styled.div`
 `;
 
 function Home(props) {
-    const { questions, dispatch } = props;
     const [activeTab, setTab] = useState(0);
 
     const handleTab = (data) => {
         setTab(data);
     };
-
-    useEffect(() => {
-        dispatch(handlePollsData());
-    }, [dispatch]);
 
     return (
         <TabContext.Provider value={{ activeTab, controlTabView: handleTab }}>
@@ -53,7 +45,7 @@ function Home(props) {
                 handleTab={handleTab}
             />
             <Container>
-                {questions.map((id) => (
+                {props.questions.map((id) => (
                     <PollContainer key={id} id={id} />
                 ))}
             </Container>
@@ -61,16 +53,4 @@ function Home(props) {
     );
 }
 
-function mapStateToProps({ polls }) {
-    return {
-        questions: Object.keys(polls).sort(
-            (a, b) => polls[b].timestamp - polls[a].timestamp
-        ),
-    };
-}
-
-Home.propTypes = {
-    questions: propTypes.array.isRequired,
-};
-
-export default connect(mapStateToProps)(Home);
+export default Home;

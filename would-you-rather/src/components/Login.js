@@ -2,8 +2,8 @@ import React from 'react';
 import styled from 'styled-components';
 import { Redirect } from 'react-router-dom';
 
-import { device } from '../utils/device-unit';
 import { useAuth } from '../context/auth';
+import { device } from '../utils/device-unit';
 import LoginSelectBox from './LoginSelectBox';
 
 const LoginContainer = styled.div`
@@ -21,11 +21,13 @@ const LoginContainer = styled.div`
     }
 `;
 
-function Login(props) {
+function Login({ location, handleDropdown, dropdownState }) {
     const { authTokens } = useAuth();
 
+    const { from } = location.state || { from: { pathname: '/' } };
+
     if (authTokens) {
-        return <Redirect to="/" />;
+        return <Redirect to={from} />;
     }
 
     return (
@@ -52,8 +54,8 @@ function Login(props) {
                     Please Log in to continue
                 </p>
                 <LoginSelectBox
-                    handleDropdown={props.handleDropdown}
-                    dropDownState={props.dropdownState}
+                    handleDropdown={handleDropdown}
+                    dropDownState={dropdownState}
                 />
             </div>
         </LoginContainer>

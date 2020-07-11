@@ -14,6 +14,7 @@ import {
 
 import { receivePolls, sendPollAnswer, savePoll } from '../actions/polls';
 import { setAuthedUser } from '../actions/authedUser';
+
 import { showLoading, hideLoading } from 'react-redux-loading-bar';
 
 export function handleUsersData() {

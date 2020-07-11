@@ -220,7 +220,7 @@ export function _savePoll(poll) {
             };
 
             res(formattedQuestion);
-        }, 1000);
+        }, 100);
     });
 }
 

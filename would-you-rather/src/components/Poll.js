@@ -1,7 +1,7 @@
 import React, { Fragment } from 'react';
 import propTypes from 'prop-types';
 import styled from 'styled-components';
-import { connect } from 'react-redux';
+
 import { device } from '../utils/device-unit';
 import { Link } from 'react-router-dom';
 
@@ -127,4 +127,4 @@ Poll.propTypes = {
     category: propTypes.object,
 };
 
-export default connect()(Poll);
+export default Poll;

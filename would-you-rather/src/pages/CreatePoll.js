@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { connect } from 'react-redux';
 import styled from 'styled-components';
+import { Redirect } from 'react-router-dom';
 
 import { device } from '../utils/device-unit';
 import { handleSavePoll } from '../actions/shared';
@@ -75,7 +76,7 @@ const TextLength = styled.span`
 `;
 
 function CreatePoll(props) {
-    const { dispatch } = props;
+    const { dispatch, handlePollCreation, pollCreation } = props;
 
     const [firstQuestion, setFirstQuestion] = useState('');
     const [secondQuestion, setSecondQuestion] = useState('');
@@ -84,11 +85,25 @@ function CreatePoll(props) {
     const handlePollQuestion = (e) => {
         e.preventDefault();
 
+        if (
+            firstQuestion === secondQuestion ||
+            secondQuestion === thirdQuestion ||
+            firstQuestion === thirdQuestion
+        ) {
+            alert('No duplicated questions, please');
+            return;
+        }
+
         dispatch(handleSavePoll(firstQuestion, secondQuestion, thirdQuestion));
         setFirstQuestion('');
         setSecondQuestion('');
         setThirdQuestion('');
+        handlePollCreation(!pollCreation);
     };
+
+    if (pollCreation) {
+        return <Redirect to="/" />;
+    }
 
     return (
         <FormContainer>

@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+
 import { connect } from 'react-redux';
 import { useAuth } from '../context/auth';
 import { IconContext } from 'react-icons';
@@ -70,9 +71,7 @@ function LoginSelectBox(props) {
                     <LoginBTN
                         onClick={() => {
                             setAuthTokens(user.id);
-                            setTimeout(() => {
-                                handleDropdown(!dropDownState);
-                            }, 300);
+                            handleDropdown(!dropDownState);
                         }}
                     >
                         <Avatar img={user.avatarURL} size={40} />
