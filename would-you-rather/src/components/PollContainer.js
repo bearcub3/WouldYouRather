@@ -15,9 +15,8 @@ const TabContainer1 = styled.div`
     display: ${(props) => (props.active === 1 ? `none` : `block`)};
 `;
 
-function PollContainer(props) {
+function PollContainer({ category }) {
     const { activeTab } = useTabs();
-    const { category } = props;
 
     const updatedPoll = useMemo(() => <Poll category={category} />, [category]);
 

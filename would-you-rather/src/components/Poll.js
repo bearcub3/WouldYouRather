@@ -79,16 +79,8 @@ const Time = styled.p`
     box-sizing: border-box;
 `;
 
-function Poll(props) {
-    const {
-        avatar,
-        creator,
-        questions_0,
-        answered,
-        id,
-        timestamp,
-    } = props.category;
-    const { category } = props;
+function Poll({ category }) {
+    const { avatar, creator, questions_0, answered, id, timestamp } = category;
 
     const mainQuestion = questions_0['question'];
 

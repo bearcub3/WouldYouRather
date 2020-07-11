@@ -99,6 +99,7 @@ FormToVote.propTypes = {
     dispatch: propTypes.func,
     handleToHome: propTypes.func,
     poll: propTypes.object,
+    isMobile: propTypes.bool,
 };
 
 export default connect()(FormToVote);

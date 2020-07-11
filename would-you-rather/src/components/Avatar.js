@@ -15,8 +15,8 @@ const ProfileAvatar = styled.div`
     cursor: pointer;
 `;
 
-function Avatar(props) {
-    return <ProfileAvatar img={props.img} size={props.size} />;
+function Avatar({ img, size }) {
+    return <ProfileAvatar img={img} size={size} />;
 }
 
 Avatar.propTypes = {

@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
+import propTypes from 'prop-types';
 
 import { TabContext } from '../context/tabs';
 import { device } from '../utils/device-unit';
@@ -30,7 +31,7 @@ const Container = styled.div`
     }
 `;
 
-function Home(props) {
+function Home({ questions }) {
     const [activeTab, setTab] = useState(0);
 
     const handleTab = (data) => {
@@ -45,12 +46,16 @@ function Home(props) {
                 handleTab={handleTab}
             />
             <Container>
-                {props.questions.map((id) => (
+                {questions.map((id) => (
                     <PollContainer key={id} id={id} />
                 ))}
             </Container>
         </TabContext.Provider>
     );
 }
+
+Home.propTypes = {
+    questions: propTypes.array,
+};
 
 export default Home;

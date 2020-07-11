@@ -1,5 +1,6 @@
 import React, { Fragment, useState } from 'react';
 import styled from 'styled-components';
+import propTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { Link, withRouter } from 'react-router-dom';
 
@@ -89,8 +90,7 @@ const Nav = styled.nav`
     }
 `;
 
-function Navigation(props) {
-    const { users } = props;
+function Navigation({ users }) {
     const { authTokens } = useAuth();
     const { setActive } = useHamburger();
 
@@ -148,10 +148,14 @@ function Navigation(props) {
     );
 }
 
-function mapStateToProps({ users, dispatch }) {
+function mapStateToProps({ users }) {
     return {
         users,
-        dispatch,
     };
 }
+
+Navigation.propTypes = {
+    users: propTypes.object,
+};
+
 export default withRouter(connect(mapStateToProps)(Navigation));

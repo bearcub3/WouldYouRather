@@ -9,7 +9,6 @@ export default function PrivateRoute({
 }) {
     const { authTokens } = useAuth();
 
-    console.log('PrivateRoute', authTokens);
     return (
         <Route
             {...rest}

@@ -2,6 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import styled from 'styled-components';
 import { ReactComponent as Ribbon } from '../images/ribbon.svg';
+import propTypes from 'prop-types';
 
 import { device } from '../utils/device-unit';
 import { useResize } from '../context/resize';
@@ -101,11 +102,12 @@ const ScoreBoard = styled.div`
     grid-row: 1 / span 4;
 `;
 
-function Leaderboard(props) {
-    const { totalScore } = props;
+function Leaderboard({ totalScore }) {
     const { isMobile } = useResize();
 
     const top3 = totalScore.slice(0, 3);
+
+    console.log(top3);
 
     return (
         <Container>
@@ -171,5 +173,9 @@ function mapStateToProps({ users }) {
             .sort((a, b) => b.score - a.score),
     };
 }
+
+Leaderboard.propTypes = {
+    totalScore: propTypes.arrayOf(Object),
+};
 
 export default connect(mapStateToProps)(Leaderboard);

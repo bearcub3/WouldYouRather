@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import propTypes from 'prop-types';
 
 import { connect } from 'react-redux';
 import { useAuth } from '../context/auth';
@@ -36,12 +37,10 @@ const LoginBTN = styled.button`
     }
 `;
 
-function LoginSelectBox(props) {
+function LoginSelectBox({ users, dropDownState, handleDropdown }) {
     const { setAuthTokens } = useAuth();
 
-    const { dropDownState, handleDropdown } = props;
-
-    const userlist = Object.entries(props.users).map((user) => user[1]);
+    const userlist = Object.entries(users).map((user) => user[1]);
 
     return (
         <div
@@ -88,5 +87,11 @@ function mapStateToProps({ users }) {
         users,
     };
 }
+
+LoginSelectBox.propTypes = {
+    users: propTypes.object,
+    dropDownState: propTypes.bool,
+    handleDropdown: propTypes.func,
+};
 
 export default connect(mapStateToProps)(LoginSelectBox);

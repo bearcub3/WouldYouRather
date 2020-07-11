@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import propTypes from 'prop-types';
 import { Redirect } from 'react-router-dom';
 
 import { useAuth } from '../context/auth';
@@ -61,5 +62,11 @@ function Login({ location, handleDropdown, dropdownState }) {
         </LoginContainer>
     );
 }
+
+Login.propTypes = {
+    location: propTypes.object,
+    handleDropdown: propTypes.func,
+    dropDownState: propTypes.bool,
+};
 
 export default Login;

@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { connect } from 'react-redux';
 import styled from 'styled-components';
 import { Redirect } from 'react-router-dom';
+import propTypes from 'prop-types';
 
 import { device } from '../utils/device-unit';
 import { handleSavePoll } from '../actions/shared';
@@ -75,9 +76,7 @@ const TextLength = styled.span`
     transition: background-color 0.4s ease-out;
 `;
 
-function CreatePoll(props) {
-    const { dispatch, handlePollCreation, pollCreation } = props;
-
+function CreatePoll({ dispatch, handlePollCreation, pollCreation }) {
     const [firstQuestion, setFirstQuestion] = useState('');
     const [secondQuestion, setSecondQuestion] = useState('');
     const [thirdQuestion, setThirdQuestion] = useState('');
@@ -164,5 +163,11 @@ function CreatePoll(props) {
         </FormContainer>
     );
 }
+
+CreatePoll.propTypes = {
+    dispatch: propTypes.func,
+    handlePollCreation: propTypes.func,
+    pollCreation: propTypes.bool,
+};
 
 export default connect()(CreatePoll);

@@ -92,8 +92,9 @@ function PollView({ match, polls, location }) {
 }
 
 PollView.propTypes = {
-    dispatch: propTypes.func,
+    match: propTypes.object,
     location: propTypes.object,
+    poll: propTypes.object,
 };
 
 function mapToStateToProps({ polls }) {

@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import propTypes from 'prop-types';
 import { connect } from 'react-redux';
 import LoadingBar from 'react-redux-loading-bar';
 import { Route, Switch, BrowserRouter as Router } from 'react-router-dom';
@@ -176,5 +177,10 @@ function mapStateToProps({ polls }) {
         ),
     };
 }
+
+App.propTypes = {
+    dispatch: propTypes.func,
+    questions: propTypes.array,
+};
 
 export default connect(mapStateToProps)(App);

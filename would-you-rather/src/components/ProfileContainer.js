@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
+import propTypes from 'prop-types';
 
 import { useAuth } from '../context/auth';
 import { useHamburger } from '../context/hamburger';
@@ -69,12 +70,15 @@ const LinkEl = styled(Link)`
     }
 `;
 
-function ProfileContainer(props) {
+function ProfileContainer({
+    userAvatar,
+    userName,
+    handleDropdown,
+    dropdownState,
+}) {
     const { setAuthTokens } = useAuth();
     const { setActive } = useHamburger();
     const { isMobile } = useResize();
-
-    const { userAvatar, userName, handleDropdown, dropdownState } = props;
 
     return (
         <AvatarContainer onClick={() => handleDropdown(!dropdownState)}>
@@ -125,9 +129,11 @@ function ProfileContainer(props) {
     );
 }
 
-// ProfileContainer.propTypes = {
-//     userAvatar: propTypes.string,
-//     userName: propTypes.string,
-// };
+ProfileContainer.propTypes = {
+    userAvatar: propTypes.string,
+    userName: propTypes.string,
+    handleDropdown: propTypes.func,
+    dropdownState: propTypes.bool,
+};
 
 export default ProfileContainer;

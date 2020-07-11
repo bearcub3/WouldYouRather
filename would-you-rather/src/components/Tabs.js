@@ -54,8 +54,7 @@ const TabWrapper = styled.div`
     box-sizing: border-box;
 `;
 
-function Tabs(props) {
-    const { activeTab, handleTab, tabs } = props;
+function Tabs({ activeTab, handleTab, tabs }) {
     return (
         <TabWrapper>
             {tabs.map(({ label, value }) => (

@@ -1,5 +1,6 @@
 import React, { Fragment } from 'react';
 import styled, { keyframes } from 'styled-components';
+import propTypes from 'prop-types';
 
 import { TiThumbsUp } from 'react-icons/ti';
 import { useAuth } from '../context/auth';
@@ -67,9 +68,8 @@ const Badge = styled.span`
     margin-top: -60px;
 `;
 
-function PollResult(props) {
+function PollResult({ isMobile, poll }) {
     const { authTokens } = useAuth();
-    const { isMobile, poll } = props;
 
     const filterQuestions = Object.entries(poll)
         .filter(([key, value]) => [key, value])
@@ -122,5 +122,10 @@ function PollResult(props) {
         </div>
     );
 }
+
+PollResult.propTypes = {
+    isMobile: propTypes.bool,
+    poll: propTypes.object,
+};
 
 export default PollResult;
