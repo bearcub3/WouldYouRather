@@ -34,7 +34,7 @@ const PollCreatorName = styled.div`
     letter-spacing: -0.05rem;
 `;
 
-function PollView({ match, polls, location }) {
+function PollView({ match, polls, users, authedUser }) {
     const id = match.params.id;
     const poll = polls[id];
 
@@ -56,7 +56,7 @@ function PollView({ match, polls, location }) {
             ) : (
                 <Fragment>
                     <PollCreatorName>
-                        {location.state.category.creator}{' '}
+                        {users[poll.creator].name}
                         <span
                             style={{
                                 fontWeight: `400`,
@@ -64,25 +64,23 @@ function PollView({ match, polls, location }) {
                                 fontFamily: `Open Sans`,
                             }}
                         >
+                            {' '}
                             asks
                         </span>
                     </PollCreatorName>
                     {isMobile ? null : (
                         <Avatar
-                            img={location.state.category.avatar}
+                            img={users[poll.creator].avatarURL}
                             size={140}
                         />
                     )}
-                    {location.state.category.answered ? (
-                        <PollResult
-                            poll={location.state.category}
-                            isMobile={isMobile}
-                        />
+                    {users[authedUser].answered[id] ? (
+                        <PollResult poll={poll} isMobile={isMobile} />
                     ) : (
                         <FormToVote
                             handleToHome={handleToHome}
                             isMobile={isMobile}
-                            poll={location.state.category}
+                            poll={poll}
                         />
                     )}
                 </Fragment>
@@ -93,14 +91,16 @@ function PollView({ match, polls, location }) {
 
 PollView.propTypes = {
     match: propTypes.object,
-    location: propTypes.object,
-    poll: propTypes.object,
+    users: propTypes.object,
+    polls: propTypes.object,
 };
 
-function mapToStateToProps({ polls }) {
+function mapStateToProps({ polls, users, authedUser }) {
     return {
         polls,
+        users,
+        authedUser,
     };
 }
 
-export default withRouter(connect(mapToStateToProps)(PollView));
+export default withRouter(connect(mapStateToProps)(PollView));

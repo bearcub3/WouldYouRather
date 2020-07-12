@@ -105,7 +105,6 @@ function Poll({ category }) {
                 <Button
                     to={{
                         pathname: `/questions/${id}`,
-                        state: { category },
                     }}
                 >
                     {answered ? 'View Result' : 'Join Vote'}

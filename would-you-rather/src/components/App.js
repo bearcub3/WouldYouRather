@@ -28,6 +28,7 @@ function App(props) {
 
     useEffect(() => {
         dispatch(handleUsersData());
+        dispatch(handlePollsData());
     }, [dispatch]);
 
     // Poll creation
@@ -61,7 +62,6 @@ function App(props) {
     useEffect(() => {
         if (authTokens) {
             dispatch(handleAuthentication(authTokens));
-            dispatch(handlePollsData());
         }
     }, [dispatch, authTokens]);
 
@@ -113,7 +113,10 @@ function App(props) {
                                     path="/"
                                     exact
                                     render={(props) => (
-                                        <Home questions={questions} />
+                                        <Home
+                                            {...props}
+                                            questions={questions}
+                                        />
                                     )}
                                 />
                                 <PrivateRoute
