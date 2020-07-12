@@ -53,3 +53,9 @@ We create many states as we need when it comes to creating a dynamic UI componen
 #### Route    
 
 We can pass a component as a function with render prop. It gives us access to all the same route props such as match, location and history. "HOC"/ "HOF"
+
+> worth of reading (thank you udacity reviewer!)    
+https://redux-toolkit.js.org/api/createSelector    
+https://github.com/reduxjs/reselect    
+https://gist.github.com/PurpleBooth/109311bb0361f32d87a2    
+
