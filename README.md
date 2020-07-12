@@ -56,4 +56,6 @@ We can pass a component as a function with render prop. It gives us access to al
 
 > worth of reading (thank you udacity reviewer!)    
 https://redux-toolkit.js.org/api/createSelector    
-https://github.com/reduxjs/reselect
+https://github.com/reduxjs/reselect    
+https://gist.github.com/PurpleBooth/109311bb0361f32d87a2    
+
