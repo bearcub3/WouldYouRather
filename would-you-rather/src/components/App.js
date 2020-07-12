@@ -55,7 +55,7 @@ function App(props) {
     const [authTokens, setAuthTokens] = useState(tokens);
 
     const setToken = (data) => {
-        document.cookie = `username=${data}`;
+        //document.cookie = `username=${data}`;
         setAuthTokens(data);
     };
 
@@ -131,7 +131,7 @@ function App(props) {
                                         />
                                     )}
                                 />
-                                <Route
+                                <PrivateRoute
                                     path="/leaderboard"
                                     component={Leaderboard}
                                 />
